@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>College Basketball Reddit Project – summary</title>
+<title>College Basketball Reddit Project – project_eda_dataframe</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,69 @@ width: 0.8em;
 margin: 0 0.8em 0.2em -1.6em;
 vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
 </style>
 
 
@@ -3973,7 +4036,7 @@ vertical-align: -.125em;
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./project_eda_dataframe.html" class="sidebar-item-text sidebar-link">EDA Dataframe</a>
+  <a href="./project_eda_dataframe.html" class="sidebar-item-text sidebar-link active">EDA Dataframe</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -4038,7 +4101,7 @@ vertical-align: -.125em;
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./summary.html" class="sidebar-item-text sidebar-link active">Summary</a>
+  <a href="./summary.html" class="sidebar-item-text sidebar-link">Summary</a>
   </div>
 </li>
       </ul>
@@ -4052,7 +4115,11 @@ vertical-align: -.125em;
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#summary" id="toc-summary" class="nav-link active" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#eda-dataframe" id="toc-eda-dataframe" class="nav-link active" data-scroll-target="#eda-dataframe">EDA Dataframe</a>
+  <ul class="collapse">
+  <li><a href="#loading-intermediate-data" id="toc-loading-intermediate-data" class="nav-link" data-scroll-target="#loading-intermediate-data">Loading Intermediate Data</a></li>
+  <li><a href="#exploring-the-data" id="toc-exploring-the-data" class="nav-link" data-scroll-target="#exploring-the-data">Exploring the Data</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -4061,10 +4128,484 @@ vertical-align: -.125em;
 
 
 
-<section id="summary" class="level1">
-<h1>Summary</h1>
+<section id="eda-dataframe" class="level1">
+<h1>EDA Dataframe</h1>
+<p>This section covers:</p>
+<ol type="1">
+<li>Data Cleaning</li>
+<li>Dataframe Analysis</li>
+<li>Creating New Variables</li>
+</ol>
+<section id="loading-intermediate-data" class="level3">
+<h3 class="anchored" data-anchor-id="loading-intermediate-data">Loading Intermediate Data</h3>
+<p>Here we load the intermediate data which includes 2 datasets: <code>Comments</code> and <code>Submissions</code>. These datasets include all the Reddit posts between September 2021 and April 2022 (The approximate length of the College Basketball Season). No additional cleaning has already been done on this data</p>
+<div class="cell" data-gather="{&quot;logged&quot;:1699545438594}" data-jupyter="{&quot;outputs_hidden&quot;:false,&quot;source_hidden&quot;:false}" data-nteract="{&quot;transient&quot;:{&quot;deleting&quot;:false}}" data-execution_count="4">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Necessary Libraries</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>workspace_default_storage_account <span class="op">=</span> <span class="st">&quot;aml6214727930&quot;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>workspace_default_container <span class="op">=</span> <span class="st">&quot;azureml-blobstore-6653633b-3460-4381-9199-d9e0f368353c&quot;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>workspace_wasbs_base_url <span class="op">=</span> (</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f&quot;wasbs://</span><span class="sc">{</span>workspace_default_container<span class="sc">}</span><span class="ss">@</span><span class="sc">{</span>workspace_default_storage_account<span class="sc">}</span><span class="ss">.blob.core.windows.net/&quot;</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>comments_path <span class="op">=</span> <span class="st">&quot;/basketball_comments_sep.parquet&quot;</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>submissions_path <span class="op">=</span> <span class="st">&quot;/basketball_submissions_sep.parquet&quot;</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>comments <span class="op">=</span> spark.read.parquet(<span class="ss">f&quot;</span><span class="sc">{</span>workspace_wasbs_base_url<span class="sc">}{</span>comments_path<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>submissions <span class="op">=</span> spark.read.parquet(<span class="ss">f&quot;</span><span class="sc">{</span>workspace_wasbs_base_url<span class="sc">}{</span>submissions_path<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>submissions <span class="op">=</span> submissions.cache()</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>comments <span class="op">=</span> comments.cache()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="exploring-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="exploring-the-data">Exploring the Data</h3>
+<section id="data-shape-and-schema" class="level4">
+<h4 class="anchored" data-anchor-id="data-shape-and-schema">Data Shape and Schema</h4>
+<p>The breakdown of the 3 subreddits by number of posts is heavily imbalanced as is expected. In submissions there are just over 22,000 posts and in comments there are just over 1,575,000 comments. The majority of these posts come from the CollegeBasketball subreddit.</p>
+<div class="cell" data-gather="{&quot;logged&quot;:1699375642672}" data-jupyter="{&quot;outputs_hidden&quot;:false,&quot;source_hidden&quot;:false}" data-nteract="{&quot;transient&quot;:{&quot;deleting&quot;:false}}" data-execution_count="8">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Count of Submissions by Subreddit&quot;</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(submissions.groupBy(<span class="st">&#39;subreddit&#39;</span>).count().show())</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Count of Comments by Subreddit&quot;</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(comments.groupBy(<span class="st">&#39;subreddit&#39;</span>).count().show())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<pre><code>StatementMeta(d3c1b951-094c-48e1-919d-e32bc175397b, 14, 13, Finished, Available)</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Count of Submissions by Subreddit
++-----------------+-----+
+|        subreddit|count|
++-----------------+-----+
+|         jayhawks|  632|
+|CollegeBasketball|21290|
+|         tarheels|  230|
++-----------------+-----+
+
+None
+Count of Comments by Subreddit
++-----------------+-------+
+|        subreddit|  count|
++-----------------+-------+
+|         jayhawks|   6541|
+|CollegeBasketball|1567801|
+|         tarheels|    828|
++-----------------+-------+
+
+None</code></pre>
+</div>
+</div>
+<p>The important variables in the submissions dataframe are</p>
+<ol type="1">
+<li><code>subreddit</code>: The Subreddit that the post is in</li>
+<li><code>author</code> : Who authored the post</li>
+<li><code>selftext</code> : The contents of the post</li>
+<li><code>created_utc</code> : The timestamp of the post</li>
+</ol>
+<p>The important variables in the comments dataframe are</p>
+<ol type="1">
+<li><code>subreddit</code>: The Subreddit that the post is in</li>
+<li><code>author</code> : Who authored the post</li>
+<li><code>body</code> : The contents of the post</li>
+<li><code>created_utc</code> : The timestamp of the post</li>
+</ol>
+<div class="cell" data-gather="{&quot;logged&quot;:1699375674532}" data-jupyter="{&quot;outputs_hidden&quot;:false,&quot;source_hidden&quot;:false}" data-nteract="{&quot;transient&quot;:{&quot;deleting&quot;:false}}" data-execution_count="12">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Submissions Schema&quot;</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>submissions.printSchema()</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Comments Schema&quot;</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>comments.printSchema()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<pre><code>StatementMeta(d3c1b951-094c-48e1-919d-e32bc175397b, 14, 17, Finished, Available)</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Submissions Schema
+root
+ |-- subreddit: string (nullable = true)
+ |-- author: string (nullable = true)
+ |-- author_flair_text: string (nullable = true)
+ |-- title: string (nullable = true)
+ |-- selftext: string (nullable = true)
+ |-- created_utc: timestamp (nullable = true)
+ |-- num_comments: long (nullable = true)
+
+Comments Schema
+root
+ |-- subreddit: string (nullable = true)
+ |-- author: string (nullable = true)
+ |-- author_flair_text: string (nullable = true)
+ |-- body: string (nullable = true)
+ |-- parent_id: string (nullable = true)
+ |-- link_id: string (nullable = true)
+ |-- id: string (nullable = true)
+ |-- created_utc: timestamp (nullable = true)
+</code></pre>
+</div>
+</div>
+</section>
+<section id="missing-data" class="level4">
+<h4 class="anchored" data-anchor-id="missing-data">Missing Data</h4>
+<p>Since Reddit is a user driven platform there will likely be issues with missing text in posts or deleted posts/comments. Lets check for missing data before we proceed.</p>
+<div class="cell" data-gather="{&quot;logged&quot;:1699545538140}" data-jupyter="{&quot;outputs_hidden&quot;:false,&quot;source_hidden&quot;:false}" data-nteract="{&quot;transient&quot;:{&quot;deleting&quot;:false}}" data-execution_count="7">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Submissions</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>missing_values <span class="op">=</span> [<span class="st">&quot;&quot;</span>, <span class="st">&quot;[deleted]&quot;</span>, <span class="st">&quot;[removed]&quot;</span>]</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>missing_df <span class="op">=</span> submissions.withColumn(<span class="st">&quot;selftext&quot;</span>, when(col(<span class="st">&quot;selftext&quot;</span>).isin(missing_values), <span class="va">None</span>).otherwise(col(<span class="st">&quot;selftext&quot;</span>)))</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>missing_data_count <span class="op">=</span> missing_df.<span class="bu">filter</span>(col(<span class="st">&quot;selftext&quot;</span>).isNull()).count()</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Missing Text Column in Submissions =&quot;</span>,missing_data_count)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Comments</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>missing_df_c <span class="op">=</span> comments.withColumn(<span class="st">&quot;body&quot;</span>, when(col(<span class="st">&quot;body&quot;</span>).isin(missing_values), <span class="va">None</span>).otherwise(col(<span class="st">&quot;body&quot;</span>)))</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>missing_data_count <span class="op">=</span> missing_df_c.<span class="bu">filter</span>(col(<span class="st">&quot;body&quot;</span>).isNull()).count()</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Missing Text Column in Comments =&quot;</span>,missing_data_count)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<pre><code>StatementMeta(d3c1b951-094c-48e1-919d-e32bc175397b, 16, 12, Finished, Available)</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Missing Text Column in Submissions = 12348
+Missing Text Column in Comments = 85295</code></pre>
+</div>
+</div>
+<p>There are over 12,000 missing posts in <code>Submissions</code> and around 85,000 missing comments in <code>Comments</code>. We will remove these before doing further analysis</p>
+<div class="cell" data-gather="{&quot;logged&quot;:1699545538653}" data-jupyter="{&quot;outputs_hidden&quot;:false,&quot;source_hidden&quot;:false}" data-nteract="{&quot;transient&quot;:{&quot;deleting&quot;:false}}" data-execution_count="8">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>submissions <span class="op">=</span> missing_df.na.drop(subset<span class="op">=</span>[<span class="st">&quot;selftext&quot;</span>])</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>comments <span class="op">=</span> missing_df_c.na.drop(subset <span class="op">=</span> [<span class="st">&quot;body&quot;</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<pre><code>StatementMeta(d3c1b951-094c-48e1-919d-e32bc175397b, 16, 13, Finished, Available)</code></pre>
+</div>
+</div>
+<p>The new counts of the subreddits with missing removed show about half of the submission data remaining, but a large portion of the comments data is intact.</p>
+<div class="cell" data-gather="{&quot;logged&quot;:1699376511509}" data-jupyter="{&quot;outputs_hidden&quot;:false,&quot;source_hidden&quot;:false}" data-nteract="{&quot;transient&quot;:{&quot;deleting&quot;:false}}" data-execution_count="23">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Count of Submissions by Subreddit with Missing Removed&quot;</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(submissions.groupBy(<span class="st">&#39;subreddit&#39;</span>).count().show())</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Count of Comments by Subreddit with Missing Removed&quot;</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(comments.groupBy(<span class="st">&#39;subreddit&#39;</span>).count().show())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<pre><code>StatementMeta(d3c1b951-094c-48e1-919d-e32bc175397b, 14, 28, Finished, Available)</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Count of Submissions by Subreddit with Missing Removed
++-----------------+-----+
+|        subreddit|count|
++-----------------+-----+
+|         jayhawks|  204|
+|CollegeBasketball| 9567|
+|         tarheels|   33|
++-----------------+-----+
+
+None
+Count of Comments by Subreddit with Missing Removed
++-----------------+-------+
+|        subreddit|  count|
++-----------------+-------+
+|         jayhawks|   6328|
+|CollegeBasketball|1482767|
+|         tarheels|    780|
++-----------------+-------+
+
+None</code></pre>
+</div>
+</div>
+</section>
+<section id="adding-day-month-year-columns" class="level4">
+<h4 class="anchored" data-anchor-id="adding-day-month-year-columns">Adding Day, Month, Year Columns</h4>
+<div class="cell" data-gather="{&quot;logged&quot;:1699548333727}" data-jupyter="{&quot;outputs_hidden&quot;:false,&quot;source_hidden&quot;:false}" data-nteract="{&quot;transient&quot;:{&quot;deleting&quot;:false}}" data-execution_count="62">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>submissions <span class="op">=</span> (</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    submissions</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    .withColumn(<span class="st">&quot;day&quot;</span>, dayofmonth(col(<span class="st">&quot;created_utc&quot;</span>)))</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    .withColumn(<span class="st">&quot;month&quot;</span>, month(col(<span class="st">&quot;created_utc&quot;</span>)))</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    .withColumn(<span class="st">&quot;year&quot;</span>, year(col(<span class="st">&quot;created_utc&quot;</span>)))</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>comments <span class="op">=</span> (</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    comments</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    .withColumn(<span class="st">&quot;day&quot;</span>, dayofmonth(col(<span class="st">&quot;created_utc&quot;</span>)))</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    .withColumn(<span class="st">&quot;month&quot;</span>, month(col(<span class="st">&quot;created_utc&quot;</span>)))</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    .withColumn(<span class="st">&quot;year&quot;</span>, year(col(<span class="st">&quot;created_utc&quot;</span>)))</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="first-snapshot-of-data" class="level4">
+<h4 class="anchored" data-anchor-id="first-snapshot-of-data">First Snapshot of Data</h4>
+<p>Here we can see the most important columns from <code>submissions</code> and <code>comments</code>. The <code>selftext</code> and <code>body</code> columns hold the post and comments, respectively.</p>
+<div class="cell" data-gather="{&quot;logged&quot;:1699376638664}" data-jupyter="{&quot;outputs_hidden&quot;:false,&quot;source_hidden&quot;:false}" data-nteract="{&quot;transient&quot;:{&quot;deleting&quot;:false}}" data-execution_count="24">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Submission Data&quot;</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>submissions.select(<span class="st">&quot;subreddit&quot;</span>, <span class="st">&quot;author&quot;</span>, <span class="st">&quot;title&quot;</span>, <span class="st">&quot;selftext&quot;</span>, <span class="st">&quot;created_utc&quot;</span>, <span class="st">&quot;num_comments&quot;</span>).show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<pre><code>StatementMeta(d3c1b951-094c-48e1-919d-e32bc175397b, 14, 29, Finished, Available)</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Submission Data
++-----------------+--------------------+--------------------+--------------------+-------------------+------------+
+|        subreddit|              author|               title|            selftext|        created_utc|num_comments|
++-----------------+--------------------+--------------------+--------------------+-------------------+------------+
+|CollegeBasketball|             rCBBMod|Announcement: The...|Hello r/CollegeBa...|2022-03-17 14:00:50|           9|
+|CollegeBasketball|       AutoModerator|[Weekly Post] Fre...|Are you new to th...|2022-04-29 15:00:11|           0|
+|CollegeBasketball|       AutoModerator|[Weekly Post] Fre...|It&#39;s Free Talk Fr...|2022-04-29 15:00:11|           1|
+|CollegeBasketball|              cbbBot|[Game Thread] Neb...|[Nebraska](#f/neb...|2022-02-23 00:54:05|          41|
+|CollegeBasketball|              cbbBot|[Game Thread] Kan...|[Kansas State](#f...|2022-02-23 01:00:04|         626|
+|CollegeBasketball|              cbbBot|[Game Thread] #24...|[Alabama](#f/alab...|2022-02-23 01:00:05|         198|
+|CollegeBasketball|              cbbBot|[Game Thread] San...|[San Diego State]...|2022-02-23 01:00:06|         135|
+|CollegeBasketball|              i_MiLK|Meet the Mid-Majo...|Hello March Madne...|2022-03-07 14:41:43|           5|
+|CollegeBasketball|          INtoCT2015|Izzo surpasses Bo...|Sorry to hijack I...|2022-03-07 14:50:10|           9|
+|CollegeBasketball|   urdueBoilermakers|Since the Big Ten...|(Note, when Purdu...|2022-03-07 14:55:07|          47|
+|CollegeBasketball|          sourceit88|240 Teams are sti...|Sunday had 17 new...|2022-03-07 14:58:37|           4|
+|CollegeBasketball|          cbbpollbot|  User Poll: Week 18|\nRank||Team (Fir...|2022-03-07 15:00:04|         173|
+|CollegeBasketball|  Sharp_Quarter_8343|               BIG10|Anyone else think...|2022-03-07 15:03:26|          19|
+|CollegeBasketball|              cbbBot|Game Thread Index...|# Ranked Games\n\...|2022-03-07 15:07:07|           0|
+|CollegeBasketball|      TallLatvianLad|Mid-Major+ User P...|Rankings of teams...|2022-03-07 15:11:12|           9|
+|         tarheels|SteelHeelNittanyLion|What seed do you ...|[removed]\n\n[Vie...|2022-03-07 15:12:34|           0|
+|CollegeBasketball|              cbbBot|[Game Thread] #18...|[Texas](#f/texas)...|2021-12-19 19:00:06|          23|
+|CollegeBasketball|              cbbBot|[Game Thread] UT ...|[UT Martin](#f/ut...|2021-12-19 19:00:10|           0|
+|CollegeBasketball|              cbbBot|[Game Thread] UT ...|[UT Arlington](#f...|2021-12-19 19:00:14|           2|
+|CollegeBasketball|              cbbBot|[Game Thread] SMU...|[SMU](#f/smu) **9...|2021-12-19 19:00:19|           3|
++-----------------+--------------------+--------------------+--------------------+-------------------+------------+
+only showing top 20 rows
+</code></pre>
+</div>
+</div>
+<div class="cell" data-gather="{&quot;logged&quot;:1699376710547}" data-jupyter="{&quot;outputs_hidden&quot;:false,&quot;source_hidden&quot;:false}" data-nteract="{&quot;transient&quot;:{&quot;deleting&quot;:false}}" data-execution_count="28">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Comments Data&quot;</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>comments.select(<span class="st">&quot;subreddit&quot;</span>, <span class="st">&quot;author&quot;</span>,<span class="st">&quot;author_flair_text&quot;</span>, <span class="st">&quot;body&quot;</span>, <span class="st">&quot;created_utc&quot;</span>).show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<pre><code>StatementMeta(d3c1b951-094c-48e1-919d-e32bc175397b, 14, 33, Finished, Available)</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Comments Data
++-----------------+-------------------+--------------------+--------------------+-------------------+
+|        subreddit|             author|   author_flair_text|                body|        created_utc|
++-----------------+-------------------+--------------------+--------------------+-------------------+
+|CollegeBasketball|         joeveralls|:cincinnati: :ohi...|Nothing is fallin...|2021-11-14 00:27:16|
+|CollegeBasketball|       DaddyStone13|:cincinnati: :big...|lol i forgot abou...|2021-11-14 00:27:51|
+|CollegeBasketball|        seahawksjoe|   :usc: USC Trojans|Also, half of the...|2021-11-14 00:28:36|
+|CollegeBasketball|       CheeseAndCam|:iowastate: Iowa ...|I like how Creigh...|2021-11-14 00:30:06|
+|CollegeBasketball|          [deleted]|                null|  Losing, apparently|2021-11-14 00:30:17|
+|CollegeBasketball|       corranhorn57|:cincinnati: Cinc...|Oklahoma lost, th...|2021-11-14 00:30:26|
+|CollegeBasketball|SwimmingInYourPants|   :usc: USC Trojans|Ah, I missed thes...|2021-11-14 00:30:29|
+|CollegeBasketball|          Papytendo|:temple: :bestofw...|This gonna be one...|2021-11-14 00:30:32|
+|CollegeBasketball|           love2Vax|:rutgers: Rutgers...|He was missing sh...|2021-11-14 00:31:19|
+|CollegeBasketball|        seahawksjoe|   :usc: USC Trojans|This man really j...|2021-11-14 00:31:51|
+|CollegeBasketball|         Cnsrbstrmp|:cincinnati: Cinc...|High IQ play ther...|2021-11-14 00:32:11|
+|CollegeBasketball|              s-sea|:usc: :nebraska: ...|yeesh yeah, 14 fo...|2021-11-14 00:32:15|
+|CollegeBasketball|           myth7550|:indiana: Indiana...|      You bet we do!|2021-11-14 00:32:52|
+|CollegeBasketball|            mjd1977|:vanderbilt: :vil...|Northern Iowa. Fa...|2021-11-14 00:33:16|
+|CollegeBasketball| WildfireTommyBitch|:memphis: Memphis...|Checking in on a ...|2021-11-14 00:33:21|
+|CollegeBasketball|       corranhorn57|:cincinnati: Cinc...|  Now we’re rolling!|2021-11-14 00:34:14|
+|CollegeBasketball|              s-sea|:usc: :nebraska: ...|lmao, I&#39;m watchin...|2021-11-14 00:34:28|
+|CollegeBasketball|         Cnsrbstrmp|:cincinnati: Cinc...|        Attaway CATS|2021-11-14 00:34:31|
+|CollegeBasketball|         MusaEnsete|:michigan: Michig...|So glad to see th...|2021-11-14 00:34:58|
+|CollegeBasketball|      HurricaneHugo|:ucsd: :sandiegos...|         Pretty cool|2021-11-14 00:35:19|
++-----------------+-------------------+--------------------+--------------------+-------------------+
+only showing top 20 rows
+</code></pre>
+</div>
+</div>
+</section>
+<section id="creating-author-flair-column" class="level4">
+<h4 class="anchored" data-anchor-id="creating-author-flair-column">Creating author flair column</h4>
+<p><code>author_flair_text</code> is a column that contains information about the user icon of the reddit user. In most of these posts this is the team that the author supports. Here we create a new variable that indicates who the author of the comment or post supports</p>
+<div class="cell" data-gather="{&quot;logged&quot;:1699545539358}" data-jupyter="{&quot;outputs_hidden&quot;:false,&quot;source_hidden&quot;:false}" data-nteract="{&quot;transient&quot;:{&quot;deleting&quot;:false}}" data-execution_count="9">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>team_pattern <span class="op">=</span> <span class="vs">r&quot;:([\w\s]+):&quot;</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the team names and create the &quot;supported_team&quot; column</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>submissions <span class="op">=</span> submissions.withColumn(<span class="st">&quot;supported_team&quot;</span>, regexp_extract(col(<span class="st">&quot;author_flair_text&quot;</span>), team_pattern, <span class="dv">1</span>))</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>comments <span class="op">=</span> comments.withColumn(<span class="st">&quot;supported_team&quot;</span>, regexp_extract(col(<span class="st">&quot;author_flair_text&quot;</span>), team_pattern, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>If we remove the <code>r/tarheels</code> and <code>r/jayhawks</code> subreddits from our data temporarily we can get a good idea of what teams are the most supported in the user base of <code>r/CollegeBasektball</code>.</p>
+<p>In <code>submissions</code> the most common icons are the default <code>rcbb</code> (r/collegebasketball) and <code>null</code> (no icon). Ignoring those we see that the most supported teams are Florida State, Illinois, Purdue, and Duke. In <code>comments</code>, <code>null</code> is the most common icon, however after that the most supported teams are Purdue, North Carolina, Illinois, and Kentucky.</p>
+<p>This shows that some fan bases may be more active posters while others may be more involved in the comments section.</p>
+<div class="cell" data-gather="{&quot;logged&quot;:1699377523949}" data-jupyter="{&quot;outputs_hidden&quot;:false,&quot;source_hidden&quot;:false}" data-nteract="{&quot;transient&quot;:{&quot;deleting&quot;:false}}" data-execution_count="39">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Submissions Top Supported Teams&quot;</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>submissions.<span class="bu">filter</span>(col(<span class="st">&quot;subreddit&quot;</span>)<span class="op">==</span><span class="st">&quot;CollegeBasketball&quot;</span>).groupBy(<span class="st">&quot;supported_team&quot;</span>).agg(count(<span class="st">&quot;*&quot;</span>).alias(<span class="st">&quot;count&quot;</span>)).orderBy(desc(<span class="st">&quot;count&quot;</span>)).show()</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Comments Top Supported Teams&quot;</span>)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>comments.<span class="bu">filter</span>(col(<span class="st">&quot;subreddit&quot;</span>)<span class="op">==</span><span class="st">&quot;CollegeBasketball&quot;</span>).groupBy(<span class="st">&quot;supported_team&quot;</span>).agg(count(<span class="st">&quot;*&quot;</span>).alias(<span class="st">&quot;count&quot;</span>)).orderBy(desc(<span class="st">&quot;count&quot;</span>)).show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<pre><code>StatementMeta(d3c1b951-094c-48e1-919d-e32bc175397b, 14, 44, Finished, Available)</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Submissions Top Supported Teams
++----------------+-----+
+|  supported_team|count|
++----------------+-----+
+|            rcbb| 6632|
+|            null|  821|
+|    floridastate|  124|
+|        illinois|   89|
+|          purdue|   84|
+|            duke|   69|
+|   northcarolina|   66|
+|          kansas|   64|
+|       iowastate|   64|
+|        virginia|   62|
+|        kentucky|   62|
+|     connecticut|   51|
+|          dayton|   48|
+|        michigan|   43|
+|mississippistate|   42|
+|         indiana|   36|
+|         gonzaga|   35|
+|    sanjosestate|   35|
+|   michiganstate|   33|
+|          auburn|   32|
++----------------+-----+
+only showing top 20 rows
+
+Comments Top Supported Teams
++--------------+------+
+|supported_team| count|
++--------------+------+
+|          null|173474|
+|        purdue| 72772|
+| northcarolina| 68933|
+|      illinois| 62610|
+|      kentucky| 56856|
+|        kansas| 55664|
+|      michigan| 52395|
+| michiganstate| 51169|
+|       indiana| 40537|
+|        auburn| 39623|
+|          duke| 34871|
+|     texastech| 34346|
+|     iowastate| 32179|
+|     wisconsin| 32087|
+|          iowa| 27663|
+|      virginia| 25376|
+|       arizona| 24325|
+|      arkansas| 22708|
+|       gonzaga| 21720|
+|     ohiostate| 20953|
++--------------+------+
+only showing top 20 rows
+</code></pre>
+</div>
+</div>
+</section>
+<section id="creating-game-thread-indicator-and-details-about-game-teams-ranking-time" class="level4">
+<h4 class="anchored" data-anchor-id="creating-game-thread-indicator-and-details-about-game-teams-ranking-time">Creating Game Thread Indicator and details about game (teams, ranking, time)</h4>
+<p>Some posts in the submissions of <code>r/CollegeBasketball</code> are game threads where people can comment on and discuss specific games that are being played. We can extract information about the title to determine the teams playing in the game, their rankings, and the time the game is being played.</p>
+<p>From here we can determine which games have the most comments and thereby can act as a proxy for which games were the most watched on reddit. We see that the most commented on games involve North Carolina, and further analysis of these games show that the three most popular games are the Elite Eights, Final Four, and Championship games for North Carolina. Additionally we see that all of the most popular games are between ranked teams.</p>
+<p>Expanding on this finding that ranked matchups seem to have more interest we did some further analysis to look at the popularity of games over the course of a season and also the difference between ranked and unranked mathcups. Here we see that ranked matchups have significantly higher average number of comment in all months of the season. If we compare only February, ranked matchups have on average 12.5 times the number of comments of unranked matchups. Additionally we see that April and March have the highest number of average comments across both groups, while the earlier months in the season (November and December) have lower average comments per game.</p>
+<div class="cell" data-gather="{&quot;logged&quot;:1699547580268}" data-jupyter="{&quot;outputs_hidden&quot;:false,&quot;source_hidden&quot;:false}" data-nteract="{&quot;transient&quot;:{&quot;deleting&quot;:false}}" data-execution_count="58">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create condition for title column starting with the string [Game Thread]</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>condition <span class="op">=</span> submissions[<span class="st">&quot;title&quot;</span>].startswith(<span class="st">&quot;[Game Thread]&quot;</span>)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co"># create new column in submissions indicating if post is a game thread</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>submissions <span class="op">=</span> submissions.withColumn(<span class="st">&quot;game_thread&quot;</span>, when(condition, <span class="va">True</span>).otherwise(<span class="va">False</span>))</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>teams_pattern <span class="op">=</span> <span class="st">&quot;\[Game Thread\] (#?(\d*) )?([^\[@]+) @ (#?(\d*) )?([^\[@]+) \((\d</span><span class="sc">{2}</span><span class="st">:\d</span><span class="sc">{2}</span><span class="st"> [APMapm]</span><span class="sc">{2}</span><span class="st"> [A-Za-z]+)\)&quot;</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>submissions <span class="op">=</span> submissions.withColumn(<span class="st">&quot;home_ranking&quot;</span>, regexp_extract(col(<span class="st">&quot;title&quot;</span>), teams_pattern, <span class="dv">5</span>))</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>submissions <span class="op">=</span> submissions.withColumn(<span class="st">&quot;home_team&quot;</span>, regexp_extract(col(<span class="st">&quot;title&quot;</span>), teams_pattern, <span class="dv">6</span>))</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>submissions <span class="op">=</span> submissions.withColumn(<span class="st">&quot;away_ranking&quot;</span>, regexp_extract(col(<span class="st">&quot;title&quot;</span>), teams_pattern, <span class="dv">2</span>))</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>submissions <span class="op">=</span> submissions.withColumn(<span class="st">&quot;away_team&quot;</span>, regexp_extract(col(<span class="st">&quot;title&quot;</span>), teams_pattern, <span class="dv">3</span>))</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>submissions <span class="op">=</span> submissions.withColumn(<span class="st">&quot;game_time&quot;</span>, regexp_extract(col(<span class="st">&quot;title&quot;</span>), teams_pattern, <span class="dv">7</span>))</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>submissions <span class="op">=</span> submissions.withColumn(<span class="st">&quot;ranked_matchup&quot;</span>, when((col(<span class="st">&quot;home_ranking&quot;</span>)<span class="op">!=</span><span class="st">&quot;&quot;</span>)<span class="op">&amp;</span> (col(<span class="st">&quot;away_ranking&quot;</span>)<span class="op">!=</span><span class="st">&quot;&quot;</span>),<span class="va">True</span>).otherwise(<span class="va">False</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-gather="{&quot;logged&quot;:1699546747246}" data-jupyter="{&quot;outputs_hidden&quot;:false,&quot;source_hidden&quot;:false}" data-nteract="{&quot;transient&quot;:{&quot;deleting&quot;:false}}" data-execution_count="32">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>submissions.<span class="bu">filter</span>(col(<span class="st">&quot;game_thread&quot;</span>)<span class="op">==</span><span class="dv">1</span>).orderBy(col(<span class="st">&quot;num_comments&quot;</span>).desc()).limit(<span class="dv">20</span>).select(<span class="st">&quot;title&quot;</span>, <span class="st">&quot;num_comments&quot;</span>).show(truncate <span class="op">=</span> <span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<pre><code>StatementMeta(d3c1b951-094c-48e1-919d-e32bc175397b, 16, 37, Finished, Available)</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>+-----------------------------------------------------------------+------------+
+|title                                                            |num_comments|
++-----------------------------------------------------------------+------------+
+|[Game Thread] #8 North Carolina @ #1 Kansas (09:20 PM ET)        |20723       |
+|[Game Thread] #8 North Carolina @ #1 Baylor (12:10 PM ET)        |18640       |
+|[Game Thread] #8 North Carolina @ #2 Duke (08:49 PM ET)          |11959       |
+|[Game Thread] #15 Saint Peter&#39;s @ #3 Purdue (07:09 PM ET)        |9872        |
+|[Game Thread] #4 Arkansas @ #1 Gonzaga (07:09 PM ET)             |9648        |
+|[Game Thread] #15 Saint Peter&#39;s @ #8 North Carolina (05:05 PM ET)|8080        |
+|[Game Thread] #9 TCU @ #1 Arizona (09:40 PM ET)                  |7972        |
+|[Game Thread] #3 Texas Tech @ #2 Duke (09:39 PM ET)              |7045        |
+|[Game Thread] #7 Michigan State @ #2 Duke (05:15 PM ET)          |6857        |
+|[Game Thread] #4 Arkansas @ #2 Duke (08:49 PM ET)                |6775        |
+|[Game Thread] #9 Memphis @ #1 Gonzaga (09:40 PM ET)              |6698        |
+|[Game Thread] #6 Texas @ #3 Purdue (08:40 PM ET)                 |6694        |
+|[Game Thread] #15 Saint Peter&#39;s @ #2 Kentucky (07:10 PM ET)      |6682        |
+|[Game Thread] #5 Houston @ #4 Illinois (12:10 PM ET)             |6419        |
+|[Game Thread] #11 Iowa State @ #3 Wisconsin (06:10 PM ET)        |6245        |
+|[Game Thread] #11 Notre Dame @ #11 Rutgers (09:10 PM ET)         |5868        |
+|[Game Thread] #11 Michigan @ #6 Colorado State (12:15 PM ET)     |5680        |
+|[Game Thread] #25 Texas @ #13 Texas Tech (09:00 PM ET)           |5626        |
+|[Game Thread] #12 Indiana @ #12 Wyoming (09:10 PM ET)            |5591        |
+|[Game Thread] #12 Kentucky @ #1 Auburn (01:00 PM ET)             |5537        |
++-----------------------------------------------------------------+------------+
+</code></pre>
+</div>
+</div>
+<div class="cell" data-gather="{&quot;logged&quot;:1699548065717}" data-jupyter="{&quot;outputs_hidden&quot;:false,&quot;source_hidden&quot;:false}" data-nteract="{&quot;transient&quot;:{&quot;deleting&quot;:false}}" data-execution_count="60">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>submissions.<span class="bu">filter</span>(col(<span class="st">&quot;game_thread&quot;</span>)<span class="op">==</span><span class="dv">1</span>).groupBy(<span class="st">&quot;year&quot;</span>, <span class="st">&quot;month&quot;</span>, <span class="st">&quot;ranked_matchup&quot;</span>).agg(<span class="bu">round</span>(mean(<span class="st">&quot;num_comments&quot;</span>),<span class="dv">0</span>).alias(<span class="st">&quot;average_comments&quot;</span>), <span class="bu">sum</span>(col(<span class="st">&quot;num_comments&quot;</span>)).alias(<span class="st">&quot;total_comments&quot;</span>)).orderBy(col(<span class="st">&quot;average_comments&quot;</span>).desc()).limit(<span class="dv">11</span>).show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<pre><code>StatementMeta(d3c1b951-094c-48e1-919d-e32bc175397b, 16, 65, Finished, Available)</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>+----+-----+--------------+----------------+--------------+
+|year|month|ranked_matchup|average_comments|total_comments|
++----+-----+--------------+----------------+--------------+
+|2022|    4|          true|         12685.0|         38055|
+|2022|    3|          true|          3290.0|        263187|
+|2021|   11|          true|          1818.0|         18181|
+|2022|    2|          true|          1570.0|         48671|
+|2022|    1|          true|          1470.0|         38213|
+|2021|   12|          true|           740.0|          7395|
+|2022|    3|         false|           215.0|         97438|
+|2022|    1|         false|           129.0|         84812|
+|2022|    2|         false|           125.0|         93661|
+|2021|   12|         false|           103.0|         54828|
+|2021|   11|         false|            89.0|         58010|
++----+-----+--------------+----------------+--------------+
+</code></pre>
+</div>
+</div>
+<p>Using this cleaned data we will proceed to answer our business questions</p>
+<p><strong><em>Work completed by Klaas van Kempen</em></strong></p>
 
 
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->

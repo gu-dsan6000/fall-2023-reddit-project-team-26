@@ -1,19 +1,37 @@
 project:
   type: website
   output-dir: ../docs
+execute:
+  eval: false
+  freeze: true
 
 website:
-  title: Website {{< var topic.name >}}
-  navbar:
-    left:
-      - href: eda.qmd
-        text: EDA
-      - href: nlp.qmd
-        text: NLP
-      - href: ml.qmd
-        text: ML
-      - href: summary.qmd
-        text: Summary
+  title: College Basketball Reddit Project
+  sidebar:
+    style: docked
+    search: true
+    contents:
+      - section: "Project Overview"
+        contents:
+          - business_questions.ipynb
+      - section: "EDA"
+        contents:
+          - project_eda.ipynb
+          - project_eda_dataframe.ipynb
+          - project_eda_q1.ipynb
+          - project_eda_q2.ipynb
+          - project_eda_q3.ipynb
+          - project_eda_q4.ipynb
+      - section: "NLP"
+        contents:
+          - nlp.qmd
+      - section: "ML"
+        contents:
+          - ml.qmd
+      - section: "Summary"
+        contents:
+          - summary.qmd
+
   page-footer:
     left: |
       Content {{< fa brands creative-commons >}} {{< var course.copyright_year >}} by [{{< var author.name >}}] <br>
@@ -30,4 +48,6 @@ format:
     theme: cosmo
     css: styles.css
     toc: true
+    code-fold: true
+    embed-resources: true
 
