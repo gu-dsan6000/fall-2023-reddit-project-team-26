@@ -4140,7 +4140,6 @@ vertical-align: -.125em;
 <h1>EDA Question 1</h1>
 <p><strong>Business Goal 1:</strong> Between the two top teams of 2021-2022 (UNC and Kansas) which has higher reddit engagement.</p>
 <p><strong>Technical Proposal:</strong> Use regular expressions to extract mentions of the UNC and Kansas basketball team from the College Basketball subreddit to determine which is more talked about. Additionally, compute the counts of comments and submissions by day in the respective subreddits of UNC and Kansas basketball to determine which days have the most engagement for each fanbase. Finally also compute a count of comments by day in the large College Basketball subreddit to determine high engagement days in the overall college basketball community.</p>
-<p>See if there are any missing values in the comments body and the submissions selftext.</p>
 <section id="exploratory-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="exploratory-analysis">Exploratory analysis</h2>
 <section id="eda-of-comments-data" class="level3">
@@ -4270,14 +4269,12 @@ only showing top 5 rows
 </div>
 </div>
 <p>wow! It seems that ‘jayhawks’ had more reddit engagement. It also makes sense because the Kansas team is the winner of this season. We can image people screaming, shouting and sending comments after the Kansas team won.</p>
-<p>What about the trend of comments throughout the whole season?</p>
 <div class="cell" data-gather="{&quot;logged&quot;:1699466322966}" data-jupyter="{&quot;outputs_hidden&quot;:false,&quot;source_hidden&quot;:false}" data-nteract="{&quot;transient&quot;:{&quot;deleting&quot;:false}}" data-execution_count="10">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df_eda_comments <span class="op">=</span> df_eda.where((col(<span class="st">&#39;subreddit&#39;</span>) <span class="op">==</span> <span class="st">&#39;jayhawks&#39;</span>) <span class="op">|</span> (col(<span class="st">&#39;subreddit&#39;</span>) <span class="op">==</span> <span class="st">&#39;tarheels&#39;</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>And order the data by the ‘date’ column.</p>
 <div class="cell" data-gather="{&quot;logged&quot;:1699466326894}" data-jupyter="{&quot;outputs_hidden&quot;:false,&quot;source_hidden&quot;:false}" data-nteract="{&quot;transient&quot;:{&quot;deleting&quot;:false}}" data-execution_count="11">
 <details>
 <summary>Code</summary>
@@ -4296,40 +4293,39 @@ only showing top 5 rows
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">#reference:https://www.geeksforgeeks.org/ways-to-filter-pandas-dataframe-by-column-values/</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>From this plot, we can see that during the whole basketball season, the comments in the ‘jayhawks’ subreddit are more than the comments in the ‘tarheels’ subreddit. Besides, after March 2022, the number of comments in the ‘jayhawks’ increases dramatically. People were pretty exctied about the promising champion in this basketball season.</p>
 </section>
 <section id="eda-of-submissions-data" class="level3">
 <h3 class="anchored" data-anchor-id="eda-of-submissions-data">EDA of submissions data</h3>
 <p>Let’s see the popularity of both teams in reddit submissions.</p>
-<p>From the tables, the number of submissions mentioning ‘jayhawks’ is more than the number of submissions mentioning ‘tarheels’. Similarly, the numbers are both small. To see the popularity of a team, we should search for more words related to that team.</p>
 <p>Similarly, extract the date information from the ‘created_utc’ column.</p>
-<p>Which days had the most submissions?</p>
-<div class="cell" data-gather="{&quot;logged&quot;:1699451927659}" data-jupyter="{&quot;outputs_hidden&quot;:false,&quot;source_hidden&quot;:false}" data-nteract="{&quot;transient&quot;:{&quot;deleting&quot;:false}}" data-execution_count="34">
+<p>Some days in November 2021 and days in around February 2022 and March 2022 have the most submissions. This season starts in November 2021, and people must be excited about the start of a new basketball season. And when the end of the season came, people would talk about the performances in different games and so on.</p>
+<div class="cell" data-gather="{&quot;logged&quot;:1699452050211}" data-jupyter="{&quot;outputs_hidden&quot;:false,&quot;source_hidden&quot;:false}" data-nteract="{&quot;transient&quot;:{&quot;deleting&quot;:false}}" data-execution_count="35">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>submissions_eda.groupBy(<span class="st">&#39;date&#39;</span>) <span class="op">\</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>               .count() <span class="op">\</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>               .sort(desc(<span class="st">&#39;count&#39;</span>)) <span class="op">\</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>               .show(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>submissions_eda.groupBy(<span class="st">&#39;date&#39;</span>, <span class="st">&#39;subreddit&#39;</span>) <span class="op">\</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>               .count() <span class="op">\</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>               .sort(desc(<span class="st">&#39;count&#39;</span>)) <span class="op">\</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>               .show(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<pre><code>StatementMeta(7c27951d-2bdf-4140-be82-d0dc0c0e7d8e, 32, 39, Finished, Available)</code></pre>
+<pre><code>StatementMeta(7c27951d-2bdf-4140-be82-d0dc0c0e7d8e, 32, 40, Finished, Available)</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>+----------+-----+
-|      date|count|
-+----------+-----+
-|2021-11-10|  187|
-|2021-11-13|  139|
-|2022-03-06|  128|
-|2022-03-11|  127|
-|2022-02-12|  121|
-+----------+-----+
+<pre><code>+----------+-----------------+-----+
+|      date|        subreddit|count|
++----------+-----------------+-----+
+|2021-11-10|CollegeBasketball|  186|
+|2021-11-13|CollegeBasketball|  137|
+|2022-03-06|CollegeBasketball|  126|
+|2022-03-11|CollegeBasketball|  126|
+|2022-02-12|CollegeBasketball|  118|
++----------+-----------------+-----+
 only showing top 5 rows
 </code></pre>
 </div>
 </div>
-<p>Some days in November 2021 and days in around February 2022 and March 2022 have the most submissions. This season starts in November 2021, and people must be excited about the start of a new basketball season. And when the end of the season came, people would talk about the performances in different games and so on.</p>
 <p>Let’s focus on the submissions in the subreddit ‘jayhawks’ and the subreddit ‘tarheels’.</p>
 <div class="cell" data-gather="{&quot;logged&quot;:1699452422484}" data-jupyter="{&quot;outputs_hidden&quot;:false,&quot;source_hidden&quot;:false}" data-nteract="{&quot;transient&quot;:{&quot;deleting&quot;:false}}" data-execution_count="39">
 <details>
