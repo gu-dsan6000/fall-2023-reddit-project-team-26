@@ -63,3 +63,41 @@ The most discussed player in the college basketball subreddit in each month of t
 :::
 
 Since the NCAA became more flexible with transfers in 2020, there has been a creation of the transfer market in College Basketball. This has led to lots of discussion among whether this is good for the players, the sport, and fans. Additionally, fans talk a lot about who might be transferring and who their team could pick up in the transfer portal. Here we see how much the transfer process is discussed over the course of the season. Transfer discussion rises from January to May, with a spike from March to May. This makes sense because most players decide to transfer after the season is over, which for most teams is in March. This means fans are very reactionary in their discussion about transfers, only talking about it when players are starting to transfer, but not so much during the regular season. 
+
+### Big Wins and Big Losses (Business Goal 7)
+
+We also incorporated two datasets other than the rankings - the schedules (and win-loss records) for Kansas and UNC. These two other datasets will help us answer one of our business goals about how fans react after big wins or big losses.
+
+Let’s examine our two subreddits to see if there are answers to our questions there. First, we take the comment frequency analysis done in question 3 of our EDA analysis as a baseline for this question. We’ll do Kansas first:
+
+::: {#fig-comments_kansas layout-ncol=1}
+
+![](../data/plots/comment_count_kansas.png){fig-align="center"}
+
+Number of comments per day in the 2021-2022 season in the r/jayhawks subreddit
+:::
+
+Based on our definition of “big wins” and using the external dataset, we determined that “big wins” occurred on January 11, January 24, February 1, February 5, March 5, March 12, March 25, and April 2. There is a spike in comments on January 24, February 1, March 5, March 25, and April 2 (which is during the end-of-season tournament), but none of these spikes are anywhere close to the comment increase around the tournament championship, which makes sense. We can see that there is an increase in engagement on this subreddit when there is a “big win.”
+
+Based on our definition of “big losses” and using the external dataset, we determined that “big losses” occurred on November 26 and March 1. Wow, very few bad losses for Kansas! On the message boards, the second bad loss has a slight spike. Kansas was blessed with a schedule with few bad losses - the fans seem to have benefitted from that as well. Now, we’ll do the same thing for the other school we selected, UNC. 
+
+::: {#fig-comments_unc layout-ncol=1}
+
+![](../data/plots/comment_count_unc.png){fig-align="center"}
+
+Number of comments per day in the 2021-2022 season in the r/tarheels subreddit
+:::
+Based on our definition of “big wins”, UNC had big wins on December 1, March 5, and throughout the tournament on March 19, March 25, and April 2. There were slight spikes in the number of comments on December 1 and on the tournament win dates, as well as a huge spike on the day of the loss to Kansas in the tournament. In this chart, there is a clear buildup from the beginning of March throughout the tournament - no other big wins stick out more than those. Based on our definition of “big losses”, UNC had big losses on January 5, January 18, January 22, February 16, and March 11. Many more than Kansas had! The two bad losses in a row in late January were met with a spike in comments - one of the largest up until that point. Additionally, the March 11 loss had a spike as well, probably many fans acknowledging their chagrin heading into the tournament. Overall, big wins or big losses did show up in the comment frequency, but the tournament results were a significantly larger change in comment frequency. 
+
+### External Data 
+
+Our external data centered around answering our business questions by providing the weekly rankings of each team and the results throughout the year of the two teams we chose to focus on: Kansas and UNC. These results were incorporated throughout the answers to the business questions above. The rankings were interesting, especially because one of our teams, UNC, was rarely in the Top 25 (they were somewhat of a Cinderella story!). This gives us some interesting data points on how fans of teams outside of what experts view as the top teams behave. Overall, the rankings were chaotic in the 2021-2022 season, as shown here:
+
+::: {#fig-player_month layout-ncol=1}
+
+![](../data/plots/weekly_rankings.png){fig-align="center"}
+
+The AP top 25 ranking of each team over each week in the 2021-2022 college basketball season
+:::
+Very few teams made it to the number one spot, and the ones that did rarely stayed there long! Although clearly these rankings don’t always mean something – shown by UNC’s run to make it all the way to the championship game despite rarely being ranked all season – it is useful to have a metric to compare teams to others, especially in the face of ecstatic fanbases. 
+
