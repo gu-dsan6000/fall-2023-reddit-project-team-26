@@ -2,6 +2,23 @@
 
 ## Executive Summary
 
+Our NLP analysis led us to a number of interesting conclusions regarding user sentiment in reddit data for our chosen college basketball subreddits. We used comment frequency and sentiment to analyze things like player and team popularity, how teams react to big wins and big losses, and sentiment around team successes. First we found that there were a number of very popular players, and the popularity of these players ebbed and flowed over the course of the season as their team successes varied. Then, as the season wound down, excitement about these players transferring increased. That increase is shown here:
+
+::: {#fig-playercomments0 layout-ncol=1}
+![](../data/plots/comments_perplayer.png){fig-align="center"}
+
+Number of comments in the College Basketball subreddit for each player in the 2021-2022 season. Players displayed are first/second team all americans. 
+:::
+
+Then, we examined external data about how these teams were performing and compared that to how fans were feeling about their teams. We took some top teams and saw that there was a wide distribution of feeling about them, but overall, “Cinderella” teams were viewed favorably in submissions, and each team was viewed about equally in the comments. Additionally, we examined how sentiment varied over the season for the two most successful teams, Kansas and UNC. Here we visualize the sentiment for some of the top teams in the 2022 NCAA tournament. 
+
+::: {#fig-sentiment_dist layout-nrow=1}
+
+![](../data/plots/sentiment_distribution_for_each_team_in_comments.png){fig-align="center"}
+
+The percentage of comments that are positive, negative, and nuetral for top teams in the 2021-2022 season.
+:::
+
 
 
 ## Analysis Report
@@ -88,6 +105,47 @@ Based on our definition of “big losses” and using the external dataset, we d
 Number of comments per day in the 2021-2022 season in the r/tarheels subreddit
 :::
 Based on our definition of “big wins”, UNC had big wins on December 1, March 5, and throughout the tournament on March 19, March 25, and April 2. There were slight spikes in the number of comments on December 1 and on the tournament win dates, as well as a huge spike on the day of the loss to Kansas in the tournament. In this chart, there is a clear buildup from the beginning of March throughout the tournament - no other big wins stick out more than those. Based on our definition of “big losses”, UNC had big losses on January 5, January 18, January 22, February 16, and March 11. Many more than Kansas had! The two bad losses in a row in late January were met with a spike in comments - one of the largest up until that point. Additionally, the March 11 loss had a spike as well, probably many fans acknowledging their chagrin heading into the tournament. Overall, big wins or big losses did show up in the comment frequency, but the tournament results were a significantly larger change in comment frequency. 
+
+We will investigate whether the sentiment expressed in fan comments is influenced by the outcomes of games, particularly in cases of significant victories or defeats. This analysis will be conducted subsequent to the development and establishment of a sentiment analysis model.
+
+### Sentiment Model
+
+In this section, we built a sentiment model and tried to find the relationship between the team ranking and the sentiment. We employ a sentiment analysis model originally trained on Twitter data for our study. The decision to apply this model to Reddit data is grounded in the shared characteristics of both platforms, including similarities in content types, language styles, topic diversity, user engagement, and the nature of online discussions. However, it's important to acknowledge a key difference: Twitter's character limit often results in more succinct and occasionally cryptic language, whereas Reddit allows for lengthier and more detailed comments. This disparity in content style could potentially impact the model's accuracy in analyzing sentiment on Reddit, a factor we'll carefully consider in our analysis.
+
+*The analysis for business goal 8 is in progress and was not ready for this version*
+
+### Sentiment Analysis (Business Goal 9)
+
+In our previous exploration within the EDA section, we focused on quantifying the mention frequency of ten basketball teams. In our current analysis, we delve deeper by leveraging sentiment analysis models to dissect the emotional tone embedded within submissions and comments that reference each team. This sentiment distribution offers a nuanced perspective, going beyond mere mention counts to encapsulate the nature of the discourse surrounding these teams.
+
+::: {#fig-sentiment_dist layout-nrow=2}
+
+![](../data/plots/sentiment_distribution_for_each_team_in_submissions.png){fig-align="center"}
+![](../data/plots/sentiment_distribution_for_each_team_in_comments.png){fig-align="center"}
+
+The percentage of comments and submissions that are positive, negative, and nuetral for top teams in the 2021-2022 season.
+:::
+
+In both submissions and comments, a pronounced positive sentiment prevails across the board for all teams, with the positive sentiment—represented by green segments—forming the bulk of the sentiment distribution. Negative sentiments are relatively few, and neutral sentiments are even rarer. Among submissions, Saint Peters and Miami stand out with a substantially higher share of positive sentiment. However, Saint Peters' data is limited to just four entries, casting doubts on the reliability of these results. Miami's data is more substantial, suggesting a positive reception or favorable outcomes in related games. Yet, the unusually high volume of submissions for Miami warrants additional investigation to fully understand the drivers of this positive sentiment trend. Conversely, the sentiment distribution within comments is more uniform across teams, lacking any significant disparities.
+
+::: {#fig-point_diff layout-nrow=2}
+
+![](../data/plots/kansas_score_differences_and_daily_mentions.png){fig-align="center"}
+![](../data/plots/unc_score_differences_and_daily_mentions.png){fig-align="center"}
+
+Point differential for Kansas and UNC compared with the sentiment of their respective subreddits in 2021-2022. Green bars indicate wins where larger wins are larger bars, whereas red bars indicate losses. The green and red lines indicate number of positive and negative posts, respectively.
+:::
+
+Our investigation intensifies as we probe into the impact of match outcomes—especially resounding triumphs or losses—on the emotional tone within fan discourse. Focusing exclusively on Kansas and North Carolina, their status as the champion and runner-up offers a compelling lens through which to assess the interplay between on-court results and sentiment in fan commentary. 
+
+The figure suggests a weak correlation between the volume of comments and the game's point differential. Contrary to expectations, a decisive victory doesn't necessarily lead to an increase in positive comments or a decrease in negative ones. Similarly, a substantial defeat doesn't always trigger a rise in negative comments or a fall in positive ones. Additionally, the trends in positive and negative comments appear to move in tandem; an increase in one typically accompanies a rise in the other, as indicated by the symmetrical nature of the lines on the chart.
+
+Certainly, significant victories don't always equate to substantial point differential. Consider a top-seeded team overpowering a lower-ranked opponent by a wide margin; such outcomes rarely stir enthusiasm or provoke widespread discussion. It's crucial to factor in the caliber of the opponent and various other elements. However, even when accounting for the big wins and losses we've examined before(Section 4), there isn't a discernible difference between the nature of the comments, be they positive or negative. This observation appears to reinforce our conclusion.
+
+Additionally, it's vital to assess the model's effectiveness in accurately identifying the sentiments expressed in the comments. Comments on sports events may possess unique characteristics that a sentiment model, trained predominantly on Twitter data, might not capture. This discrepancy could contribute to the lack of clear distinction between positive and negative emotions in our analysis.
+
+On another note, fan reactions to a team's performance are often diverse and complex. A significant victory might elicit sheer joy from some fans, while others might express concern. Similarly, in the face of defeat, while some fans may express sorrow or disappointment, others might offer encouragement to the team and players, showing resilience. There's even a possibility that the fans' comments are indifferent to the game's outcome, focusing instead on different aspects. This underscores the need for more comprehensive research to validate these observations.
+
 
 ### External Data 
 
