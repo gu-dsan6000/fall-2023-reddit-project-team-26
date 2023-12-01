@@ -1,5 +1,7 @@
 # NLP
 
+Please find the code for this analysis in the notebooks located [here](https://github.com/gu-dsan6000/fall-2023-reddit-project-team-26/tree/main/code/nlp)
+
 ## Executive Summary
 
 Our NLP analysis led us to a number of interesting conclusions regarding user sentiment in reddit data for our chosen college basketball subreddits. We used comment frequency and sentiment to analyze things like player and team popularity, how teams react to big wins and big losses, and sentiment around team successes. First we found that there were a number of very popular players, and the popularity of these players ebbed and flowed over the course of the season as their team successes varied. Then, as the season wound down, excitement about these players transferring increased. That increase is shown here:
