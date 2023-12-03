@@ -13,6 +13,7 @@ website:
     contents:
       - section: "Project Overview"
         contents:
+          - introduction.qmd
           - business_questions.ipynb
       - section: "EDA"
         contents:
@@ -22,15 +23,10 @@ website:
           - project_eda_q2.ipynb
           - project_eda_q3.ipynb
           - project_eda_q4.ipynb
-      - section: "NLP"
-        contents:
-          - nlp.qmd
-      - section: "ML"
-        contents:
-          - ml.qmd
-      - section: "Summary"
-        contents:
-          - summary.qmd
+      - nlp.qmd
+      - ml.qmd
+      - feedback.qmd
+      - summary.qmd
 
   page-footer:
     left: |
