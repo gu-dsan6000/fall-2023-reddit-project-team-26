@@ -1,0 +1,12 @@
+# EDA
+
+Please find the code for data collection [here](../docs/code_files/data_collection.html)
+
+## Executive Summary
+
+## Analysis Report
+
+### Dataframe Analysis
+
+The first step in any data analysis is to explore the dataframe. In this first section of our eda we will explore the data that we collected which contains submissions and comments data of the `r/CollegeBasketball`, `r/tarheels`, and `r/jayhawks` subreddits between September 2021 and April 2022 (The approximate length of the College Basketball Season). No additional cleaning has already been done on this data. The full code for this analysis can be found [here](code_files/eda_dataframe_code.html).
+

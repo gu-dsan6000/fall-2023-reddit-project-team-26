@@ -17,7 +17,7 @@ website:
           - business_questions.ipynb
       - section: "EDA"
         contents:
-          - project_eda.ipynb
+          - eda.qmd
           - project_eda_dataframe.ipynb
           - project_eda_q1.ipynb
           - project_eda_q2.ipynb
