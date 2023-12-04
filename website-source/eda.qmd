@@ -1,6 +1,6 @@
 # EDA
 
-Please find the code for data collection [here](../docs/code_files/data_collection.html)
+Please find the code for data collection [here](code_files/data_collection.html)
 
 ## Executive Summary
 
