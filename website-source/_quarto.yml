@@ -15,14 +15,7 @@ website:
         contents:
           - introduction.qmd
           - business_questions.ipynb
-      - section: "EDA"
-        contents:
-          - eda.qmd
-          - project_eda_dataframe.ipynb
-          - project_eda_q1.ipynb
-          - project_eda_q2.ipynb
-          - project_eda_q3.ipynb
-          - project_eda_q4.ipynb
+      - eda.qmd
       - nlp.qmd
       - ml.qmd
       - feedback.qmd
