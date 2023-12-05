@@ -4129,14 +4129,9 @@ vertical-align: -.125em;
 </section>
 <section id="machine-learning-questions" class="level3">
 <h3 class="anchored" data-anchor-id="machine-learning-questions">Machine Learning Questions</h3>
-<p><strong>Business Goal 9:</strong> Assess if the sentiment on CBB subreddits can help predict game outcomes.<br>
-<strong>Technical Proposal:</strong> Build a machine learning model using historical game outcomes and pre-game subreddit sentiment as features. Use external data sets, such as season win/loss records, to create predictive model that incorporates pre-game sentiment. Test data on 2022-2023 season to determine accuracy of said model.</p>
-<p><strong>Business Goal 10:</strong> Determine what do subreddits look like in the lead up to big games or big tournaments.<br>
-<strong>Technical Proposal:</strong> Start with postseason sentiment analysis, then use cluster modeling or some similar machine learning technique to identify important games throughout the course of the season. Correlate these important games to external factors, such as rivalries, injuries, or trades. Visualize results by grouping important games over the course of the regular season and post season.</p>
-<p><strong>Business Goal 11:</strong> Assess if the Kansas Jayhawks or UNC Tar Heel subreddits more volatile throughout the season.<br>
-<strong>Technical Proposal:</strong> Compare NBA and CBB subreddits using a multitude of machine learning techniques to identify which have more varied reactions, posting tempos, or other factors. Identify which have a wider variety of types of post and poster over the course of a season. Determine if NBA fans or CBB fans are more volatile in their reaction timing, tempo, length, and frequency over the course of a season.</p>
-<p><strong>Business Goal 12:</strong> Predict which college basketball players will become major NBA stars based on Reddit discussions.<br>
-<strong>Technical Proposal:</strong> Monitor mentions and sentiments around CBB players. Track those who enter the NBA and evaluate their performance using regression analysis against Reddit metrics. Use draft status and 2022-2023 NBA season statistics to verify these outcomes.</p>
+<p><strong>Business Goal 10</strong>: Predict which comments are more popular than others in the College Basketball subreddit <strong>Technical Proposal</strong>: Determine why certain comments are more popular than others in the College Basketball subreddit. Using Random Forest Regressor to identify if factors such as sentiment, time of post, date of post, comment length, activity of author, and whether or not the author has a team icon for their profile picture are relevant in determining how popular a post will be. Use a hyperparameter search to identify the best model.</p>
+<p><strong>Business Goal 11:</strong> Predict which team each commenter supports using the comments themselves.</p>
+<p><strong>Technical Proposal</strong>: Using two different machine learning models to predict which team each commenter supports using features from the comments dataset. Use kmeans and SVM machine learning techniques to train and test two models, then compare their accuracy and recall to determine which model is more effective for this goal. Complete other visualizations using these techniques to further examine the dataset.</p>
 </section>
 <section id="an-aside" class="level3">
 <h3 class="anchored" data-anchor-id="an-aside">An Aside</h3>
