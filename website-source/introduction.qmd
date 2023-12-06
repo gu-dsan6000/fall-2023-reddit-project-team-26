@@ -1,1 +1,42 @@
 # Introduction
+
+### Project CBB: College Basketball and Redditors
+#### By: Klaas van Kempen, Shihong Zhou, Yifan Hu, and Katherine Nunez
+
+## Overview of the Project
+
+This project will use the given Reddit data to explore how Reddit users view, react to, and analyze collegiate basketball. We will compare sentiments and use external datasets such as team records and rankings to better understand how Reddit users react to their team successes or failures.
+This project will center around three different areas of analysis: exploratory data analysis (EDA), natural language processing (NLP), and machine learning (ML). We expect these three different areas of analysis to display different areas of the dataset and allow us to answer a variety of questions about this data.
+We will use the Reddit data to explore the differences in sentiment between collegiate basketball fans and how the fans of the top teams from 2021-2022 reacted over the course of the season. We chose to limit our data to 2021-2022 because we wanted to ensure that our data captured an entire basketball season and no partial seasons. The collegiate season ranges from November to about March, so by taking our data from September 2021 to April 2022, we are able to ensure that we can capture the data from an entire basketball season.
+
+::: {#fig-table1 layout-nrow=1}
+
+![](../data/plots/intro1.jpeg){fig-align="center" width="500"}
+
+Source: Carmin, Mike. (September 16 2020). NCAA to start basketball season Nov. 25; Big Ten decision up next. https://www.jconline.com/story/sports/2020/09/16/ncaa-start-basketball-season-nov-25-big-ten-decision-up-next/5813674002/
+:::
+
+## Overview of College Basketball
+
+Although professional and collegiate basketball are very related, there are some key differences that we want to establish before engaging in any exploratory data analysis. We expect these differences to become apparent in some of our sentiment analysis, NLP, and even in the exploratory phase of this project.
+Collegiate Basketball: Collegiate basketball in the United States is regulated primarily by the National Collegiate Athletic Association (NCAA). For the purposes of this project, we will be focusing on NCAA division 1 (D1) college basketball. College basketball is sorted into conferences (which typically align across sports for schools), which determines most of each team’s scheduled opponents and the conference championship tournament. At the end of each season, there is a gigantic tournament to determine the college basketball champion, colloquially called March Madness. In March, 64 teams (plus four other teams who play a “play-in game”) compete in a single-elimination tournament to determine the champion for the season. These players are considered amateurs, i.e. they do not receive contracts, but each collegiate basketball player is eligible to receive sponsorships and advertising revenues.
+
+::: {#fig-table2 layout-nrow=1}
+
+![](../data/plots/intro2.jpeg){fig-align="center" width="500"}
+
+Source: NCAA. Championship History. https://www.ncaa.com/history/basketball-men/d1 
+:::
+
+Part of our analysis will be analyzing the r/CBB (college basketball) subreddit, but we will also be analyzing the r/jayhawks and r/tarheels, the two teams to make the finals for college basketball in 2022 (Kansas won!). This way, we can also track the sentiments of the fans of the two most successful college basketball teams across the course of the season on their championship runs.
+
+::: {#fig-table3 layout-nrow=1}
+
+![](../data/plots/intro3.jpeg){fig-align="center" width="500"}
+
+Source: Withrow, Lauren. (April 5, 2022). Kansas named 2022 NCAA Men's Basketball Champion after record-setting comeback victory over North Carolina. https://www.si.com/college/northwestern/basketball/kansas-named-2022-ncaa-mens-basketball-champion-after-72-69-comeback-victory-over-north-carolina
+:::
+
+## Changes to the Business goals
+
+As the project progressed, we made a few changes to the business goals as we learned more about the data and our own capabilities. You can find the finalized versions of those buisness goals on the Business Goals section of this site.
