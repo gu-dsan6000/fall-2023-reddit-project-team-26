@@ -13,16 +13,16 @@ A count of comments per day in the /jayhawks subreddit over the 2021-2022 season
 
 For example, with the eventual champion, the Kansas Jayhawks, there was a general stasis of comments that spiked a few times a month when important games occurred, but there was a huge spike at the beginning of April, when Kansas won the NCAA Championship. This was useful EDA baselining so that we understood more about what the data looks like and how redditor posters behaved throughout a typical season.
 
-In our NLP section, we saw some interesting things, especially when we went down to the team-specific level:
+In our NLP section, we saw some interesting things as well:
 
 ::: {#fig-table2 layout-nrow=1}
 
-![](../data/plots/unc_score_differences_and_daily_mentions.png){fig-align="center" width="500"}
+![](../data/plots/sentiment_distribution_for_each_team_in_comments.png){fig-align="center" width="500"}
 
-A count of comments per day and their associated sentiments over the 2021-2022 season.
+The percentage of comments that are positive, negative, and neutral for top teams in the 2021-2022 season.
 :::
 
-This chart indicates positive or negative sentiments in comments on each specific day. Although we expected to see a strong correlation between game outcomes and comment sentiment, we actually didn’t see that - this was our first hint that reddit posters operate outside of game outcomes, and often post on a wide variety of topics that range outside of the scope of just wins and losses.
+In the comments, positive sentiments dominated for all the top teams, with relatively few negative sentiments and fewer neutral sentiments. Additionally, we made a chart about positive or negative sentiments in comments on each specific day. Although we expected to see a strong correlation between game outcomes and comment sentiment, we actually didn’t see that - this was our first hint that reddit posters operate outside of game outcomes, and often post on a wide variety of topics that range outside of the scope of just wins and losses.
 
 In the machine learning section, we saw some interesting trends as well, including how popular a comment is. We were able to construct a model with the following accuracy:
 
@@ -35,6 +35,6 @@ A count of comments per day and their associated sentiments over the 2021-2022 s
 
 In this model, we were not able to relatively accurately predict the popularity of comments when the true. Improving this model is among the next steps of our project.
 
-**Planned Next Steps:** As mentioned above, one of the possible next steps for this project include continuing to hone the accuracy of ML models to predict comment popularity. Next steps also include continuing to make other graphs and plots interactive to improve the readability and interactivity of the website, building out comment frequency patterns for teams other than the Jayhawks and Tarheels, and completing similar analyses across seasons to see if the patterns we found held. We also would like to incorporate more external datasets to improve our analysis, including how some of the popular players or popular transfers fared once they arrived in professional basketball leagues. We could also complete a similar analysis on the r/NBA subreddit and see if our conclusions held there too. All of these planned next steps would improve our project and expand our analysis if we chose to partake in them.
+**Planned Next Steps:** As mentioned above, one of the possible next steps for this project includes continuing to hone the accuracy of ML models to predict comment popularity. Next steps also include continuing to make other graphs and plots interactive to improve the readability and interactivity of the website, building out comment frequency patterns for teams other than the Jayhawks and Tarheels, and completing similar analyses across seasons to see if the patterns we found held. We also would like to incorporate more external datasets to improve our analysis, including how some of the popular players or popular transfers fared once they arrived in professional basketball leagues. We could also complete a similar analysis on the r/NBA subreddit and see if our conclusions held there too. All of these planned next steps would improve our project and expand our analysis if we chose to partake in them.
 
 **Overall,** we found this project to be interesting and enjoyable - the topic was engaging and we were challenged to use big data techniques to deal with this dataset and extract interesting conclusions from it. Thank you for walking through this project with us!
