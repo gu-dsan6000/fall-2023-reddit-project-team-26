@@ -132,8 +132,10 @@ Additionally, here is a chart (a confusion matrix) to show how the SVM model per
 
 ![](../data/plots/ml_q2_cm.png){fig-align="center" width="400"}
 
-Confusion matrix for the svm model
+Confusion matrix for the SVM model
 :::
+
+As you can see, the confusion matrix revealed that most, if not all, of the model was extremely inaccurate. There were slight trends in a few areas that the model has some success predicting, but overall, this was not an accurate result, and this model does not have any predictive power.
 
 As an additional section, we conducted some additional machine learning on using kmeans to create word clouds out of three clusters that we initially created. In these word clouds, the most common words in each cluster were:
 
@@ -150,6 +152,35 @@ As an additional section, we conducted some additional machine learning on using
 
 Word Cloud for the K-means model clusters
 :::
+
+### Business Goal 10
+**Business Goal 10:** Build a model that predicts the results of Kansas games. \
+**Technical Proposal**: Use sentiment analysis and comment attributes to build a machine learning model to predict the outcome of Kansas Jayhawks games. Use date columns and sentiment as feature inputs into this machine learning model. Use different machine learning models and evaluate performance based on confusion matrices. 
+
+To answer this question, we were working to see if the result of a basketball game could be extracted from the time and the sentiment of the comments on the day before the game and the day after the game.
+
+The available dataset included the comments under three subreddit including ‘CollegeBasketball’, ‘jayhawks’, and ‘tarheels’. We chose to focus on the Kansas games, so the comments in the “tarheels” subreddit are not relevant for this goal. Therefore, we filtered the dataset to get the comments in the both ‘CollegeBasketball’ and “jayhawks” subreddits and selected the columns including “day”, “month”, “year”, “week” and “col”. The target column is in the external dataset named “kansas_schedule.csv” in the folder “data/csv”. This external dataset is about the results of the games where Kansas played, and the results information is in the column named “Unnamed: 8”. Thus, we joined these two data frames together so that we could use machine learning pipelines to do prediction analysis. 
+
+We tried three different models for classification: two random forest models with varying number of trees (model 1 using random forest with 20 trees and model 3 with 10 trees) and model 2 using logistic regression. Then we compared the results and got the table below.
+
+::: {#fig-plot6 layout-nrow=1}
+
+![](../data/plots/ml_q3_table.png){fig-align="center" width="400"}
+
+Table of three machine learning models and their accuracies.
+:::
+
+From this table, we chose the third model, a random forest model with ten trees to make further analysis by the confusion matrix. And then, we got the confusion matrix like the graph below.
+
+::: {#fig-plot7 layout-nrow=1}
+
+![](../data/plots/ml_q3_cm.png){fig-align="center" width="400"}
+
+Confusion Matrix of random forest machine learning model.
+:::
+
+From the confusion matrix, we were surprised that the prediction performance was satisfactory. It seems that using the time and the sentiment of the comments can help make predictions for the result of the upcoming Kansas game, which is interesting.
+
 
 ### Conclusion
 
