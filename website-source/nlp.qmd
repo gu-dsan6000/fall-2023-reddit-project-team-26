@@ -60,9 +60,9 @@ The most common words in comments and submissions align with this being posts an
 
 ### Identifying Discussion Topics (Business Goals 4 & 5)
 
-Two topics that are related to college basketball are the discussion about top players and the discussion of transfers and the transfer portal. We will look at both of these topics in our reddit data, using only the comments data as our submissions data is so limited. This section will answer business goals 5 and 6. 
+Two topics that are related to college basketball are the discussion about top players and the discussion of transfers and the transfer portal. We will look at both of these topics in our reddit data, using only the comments data as our submissions data is so limited. This section will answer business goals 4 and 5. 
 
-*We edited Business goal 5 to remove looking at sentiment of players because the sentiment model was not completed yet. Business goal 6 was also changed so that we are not looking at specific transfers but at the discussion around transferring as a whole which was more time efficient.*
+*We edited Business goal 4 to remove looking at sentiment of players because the sentiment model was not completed yet. Business goal 5 was also changed so that we are not looking at specific transfers but at the discussion around transferring as a whole which was more time efficient.*
 
 Players, especially the best, are heavily discussed among college basketball fans. Here we look at 9 of the best players of the 2021-2022 season. We chose these players based on their selection to first or second team all America. We removed “Johnny Davis” who was on first team all america but has such a common first and last name that we were worried about picking up discussion on other players with the same name. First we looked at the number of comments that mention each of the players. Kofi Cockburn, Keegan Murray, and Drew Timme have some of the highest mentions. It is interesting to see such a large difference in player mentions among the best players. This could be related to the team the player plays for or how flashy/controversial they are. 
 
@@ -89,7 +89,7 @@ Since the NCAA became more flexible with transfers in 2020, there has been a cre
 Disucssion of the transfer portal during the 2021-2022 season in the comments dataframe. 
 :::
 
-### Big Wins and Big Losses (Business Goal 7)
+### Big Wins and Big Losses (Business Goal 6)
 
 We also incorporated two datasets other than the rankings - the schedules (and win-loss records) for Kansas and UNC. These two other datasets will help us answer one of our business goals about how fans react after big wins or big losses.
 
@@ -121,7 +121,7 @@ We will investigate whether the sentiment expressed in fan comments is influence
 In this section, we built a sentiment model and tried to find the relationship between the team ranking and the sentiment. We employ a sentiment analysis model originally trained on Twitter data for our study. The decision to apply this model to Reddit data is grounded in the shared characteristics of both platforms, including similarities in content types, language styles, topic diversity, user engagement, and the nature of online discussions. However, it's important to acknowledge a key difference: Twitter's character limit often results in more succinct and occasionally cryptic language, whereas Reddit allows for lengthier and more detailed comments. This disparity in content style could potentially impact the model's accuracy in analyzing sentiment on Reddit, a factor we'll carefully consider in our analysis.
 
 
-### Sentiment Analysis (Business Goal 8)
+### Sentiment Analysis (Business Goal 7)
 
 In our previous exploration within the EDA section, we focused on quantifying the mention frequency of ten basketball teams. In our current analysis, we delve deeper by leveraging sentiment analysis models to dissect the emotional tone embedded within submissions and comments that reference each team. This sentiment distribution offers a nuanced perspective, going beyond mere mention counts to encapsulate the nature of the discourse surrounding these teams.
 

@@ -12,7 +12,7 @@ Then, we use two different machine learning models to predict which team each co
 
 *A note: the business goals have changed from our original goals. Upon further exploration of the dataset, it has become apparent that our initial business objectives no longer align with the insights gleaned from the data. For instance, the anticipated correlation between the sentiment of comments and contest outcomes did not materialize as strongly as expected, casting doubt on the practicality of leveraging comment sentiment to forecast contest results. Consequently, we have pivoted our focus to previously unexamined aspects of the data, such as the popularity of comments, to ensure that our business goals remain rooted in the actionable intelligence derived from our analysis.*
 
-### Business Goal 9
+### Business Goal 8
 
 **Business Goal**: *Predict which comments are more popular than others in the College Basketball subreddit*
 
@@ -93,8 +93,8 @@ The table indicates that comment length is the most critical determinant of popu
 Temporal factors like the time of day and the date of the posting are influential as well, hinting at a correlation with peak activity periods, possibly linked to significant events such as key games that drive user engagement.
 The importance scores of other features are relatively low. For example, the sentiment of comments has little impact on the model’s predictions. This is consistent with our previous observation that sentiment is not strongly correlated with contest results, leading to a change in our business goals.
 
-### Business Goal 10
-**Business Goal 10:** Build a model that predicts the results of Kansas games. \
+### Business Goal 9
+**Business Goal 9:** Build a model that predicts the results of Kansas games. \
 
 **Technical Proposal**: Use sentiment analysis and comment attributes to build a machine learning model to predict the outcome of Kansas Jayhawks games. Use date columns and sentiment as feature inputs into this machine learning model. Use different machine learning models and evaluate performance based on confusion matrices. 
 
@@ -123,12 +123,7 @@ Confusion Matrix of random forest machine learning model.
 From the confusion matrix, we were surprised that the prediction performance was satisfactory. It seems that using the time and the sentiment of the comments can help make predictions for the result of the upcoming Kansas game, which is interesting.
 
 
-### Conclusion
-
-In this analysis we answered two business questions, one trying to predict popularity of comments, and the other trying to predict which team an author supports. In both cases we found that the available data in the reddit posts and information about the posts were not very predictive of popularity or who the author supports. Moving forward we could attempt more complex models, but with the lack of success in these models we don't think that would lead to much better results.
-
-
-### Business Goal 11
+### Business Goal 10
 
 **Business Goal:** *Predict which team each commenter supports using the comments themselves.*
 
@@ -184,36 +179,3 @@ As an additional section, we conducted some additional machine learning on using
 
 Word Cloud for the K-means model clusters
 :::
-
-### Business Goal 10
-**Business Goal 10:** Build a model that predicts the results of Kansas games. \
-**Technical Proposal**: Use sentiment analysis and comment attributes to build a machine learning model to predict the outcome of Kansas Jayhawks games. Use date columns and sentiment as feature inputs into this machine learning model. Use different machine learning models and evaluate performance based on confusion matrices. 
-
-To answer this question, we were working to see if the result of a basketball game could be extracted from the time and the sentiment of the comments on the day before the game and the day after the game.
-
-The available dataset included the comments under three subreddit including ‘CollegeBasketball’, ‘jayhawks’, and ‘tarheels’. We chose to focus on the Kansas games, so the comments in the “tarheels” subreddit are not relevant for this goal. Therefore, we filtered the dataset to get the comments in the both ‘CollegeBasketball’ and “jayhawks” subreddits and selected the columns including “day”, “month”, “year”, “week” and “col”. The target column is in the external dataset named “kansas_schedule.csv” in the folder “data/csv”. This external dataset is about the results of the games where Kansas played, and the results information is in the column named “Unnamed: 8”. Thus, we joined these two data frames together so that we could use machine learning pipelines to do prediction analysis. 
-
-We tried three different models for classification: two random forest models with varying number of trees (model 1 using random forest with 20 trees and model 3 with 10 trees) and model 2 using logistic regression. Then we compared the results and got the table below.
-
-::: {#fig-plot6 layout-nrow=1}
-
-![](../data/plots/ml_q3_table.png){fig-align="center" width="400"}
-
-Table of three machine learning models and their accuracies.
-:::
-
-From this table, we chose the third model, a random forest model with ten trees to make further analysis by the confusion matrix. And then, we got the confusion matrix like the graph below.
-
-::: {#fig-plot7 layout-nrow=1}
-
-![](../data/plots/ml_q3_cm.png){fig-align="center" width="400"}
-
-Confusion Matrix of random forest machine learning model.
-:::
-
-From the confusion matrix, we were surprised that the prediction performance was satisfactory. It seems that using the time and the sentiment of the comments can help make predictions for the result of the upcoming Kansas game, which is interesting.
-
-
-### Conclusion
-
-In this analysis we answered two business questions, one trying to predict popularity of comments, and the other trying to predict which team an author supports. In both cases we found that the available data in the reddit posts and information about the posts were not very predictive of popularity or who the author supports. Moving forward we could attempt more complex models, but with the lack of success in these models we don't think that would lead to much better results.
