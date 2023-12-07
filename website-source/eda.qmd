@@ -1,6 +1,12 @@
 ---
 title: "EDA"
-format: html
+format:
+  html:
+    page-layout: full
+    code-fold: show
+    code-copy: true
+    code-tools: true
+    code-overflow: wrap
 jupyter: python3
 freeze: true
 ---
@@ -221,146 +227,20 @@ We found that many of the questions that arose during our question 3 analysis al
 
 [Code for this analysis](code_files/eda_q4.html)
 
-```{python setup, include=FALSE, message=FALSE, warning=FALSE}
-# Setup - Run only once per Kernel App
-%conda install openjdk -y
-
-# install PySpark
-%pip install pyspark==3.4.0
-
-# install spark-nlp
-%pip install spark-nlp==5.1.3
-
-# restart kernel
-from IPython.core.display import HTML
-HTML("<script>Jupyter.notebook.kernel.restart()</script>")
-```
-
-```{python import_pyspark, include=FALSE, message=FALSE, warning=FALSE}
-# Import pyspark and build Spark session
-from pyspark.sql import SparkSession
-
-spark = (
-    SparkSession.builder.appName("PySparkApp")
-    .config("spark.jars.packages", "org.apache.hadoop:hadoop-aws:3.2.2")
-    .config(
-        "fs.s3a.aws.credentials.provider",
-        "com.amazonaws.auth.ContainerCredentialsProvider",
-    )
-    .getOrCreate()
-)
-
-print(spark.version)
-```
-
-```{python load_data, include=FALSE, message=FALSE, warning=FALSE}
-import time
-import sagemaker
-from sagemaker.spark.processing import PySparkProcessor
-
-session = sagemaker.Session()
-bucket = session.default_bucket()
-output_prefix_sub = "project/comments_sub"
-s3_output_path = f"s3a://{bucket}/{output_prefix_sub}"
-
-print(f"reading comments from {s3_output_path}")
-comments = spark.read.parquet(s3_output_path, header=True)
-print(f"shape of the comments dataframe is {comments.count():,}x{len(comments.columns)}")
-
-session = sagemaker.Session()
-bucket = session.default_bucket()
-output_prefix_sub = "project/submissions_sub"
-s3_output_path = f"s3a://{bucket}/{output_prefix_sub}"
-
-print(f"reading submissions from {s3_output_path}")
-submissions = spark.read.parquet(s3_output_path, header=True)
-print(f"shape of the submissions dataframe is {submissions.count():,}x{len(submissions.columns)}")
-```
-
-```{python clean_data, include=FALSE, message=FALSE, warning=FALSE}
-submissions = submissions.cache()
-comments = comments.cache()
-
-submissions = submissions.filter((submissions.selftext != "") & (submissions.selftext != "[deleted]")& (submissions.selftext != "[removed]"))
-comments = comments.filter(comments.body != "")
-
-from pyspark.sql.functions import col
-
-submissions = submissions.select("subreddit", "author", "title", "selftext", "created_utc", "num_comments").filter(col("subreddit") == "CollegeBasketball")
-comments = comments.select("subreddit", "author", "body", "parent_id", "created_utc").filter(col("subreddit") == "CollegeBasketball")
-```
-
-```{python aggregate, include=FALSE, message=FALSE, warning=FALSE}
-# Define a dictionary of teams and associated keywords
-team_keywords = {
-    'houston': ['houston', 'cougars', 'uh', 'uh cougars'],
-    'kansas': ['kansas', 'jayhawks', 'ku', 'rock chalk', 'ku jayhawks'],
-    'villanova': ['villanova', 'wildcats', 'nova', 'villanova wildcats'],
-    'duke': ['duke', 'blue devils', 'duke blue devils'],
-    'arkansas': ['arkansas', 'razorbacks', 'hogs', 'u of a', 'arkansas razorbacks'],
-    'saint peters': ["saint peter's", 'peacocks', "saint peter's peacocks", 'saint peters', "st. peter's", 'st peters', 'spu'],
-    'north carolina': ['north carolina', 'tar heels', 'unc', 'unc tar heels'],
-    'miami': ['miami', 'hurricanes', 'um', 'miami hurricanes'],
-    'purdue': ['purdue', 'boilermakers', 'purdue boilermakers', 'pu'],
-    'illinois': ['illinois', 'fighting illini', 'illini', 'u of i', 'university of illinois']
-}
-
-from pyspark.sql.functions import lower
-
-# Lowercase the text fields for uniformity
-comments = comments.withColumn('body', lower(col('body')))
-submissions = submissions.withColumn('title', lower(col('title')))\
-                         .withColumn('selftext', lower(col('selftext')))
-
-from pyspark.sql.functions import udf, lit, array
-from pyspark.sql.types import BooleanType
-
-# Define the UDF to check the existence of key words
-def keyword_present(text, keywords):
-    if text:
-        return any(keyword in text for keyword in keywords)
-    return False
-
-keyword_udf = udf(keyword_present, BooleanType())
-
-# Apply the UDF
-for team, keywords in team_keywords.items():
-    submissions = submissions.withColumn(
-        team,
-        keyword_udf(col("title"), array([lit(k) for k in keywords])) | keyword_udf(col("selftext"), array([lit(k) for k in keywords]))
-    )
-    comments = comments.withColumn(
-        team, 
-        keyword_udf(col("body"), array([lit(k) for k in keywords]))
-    )
-
-from pyspark.sql.functions import sum as sql_sum
-
-# Aggregate the counts for submissions
-submissions_counts = submissions.select([sql_sum(col(team).cast("int")).alias(team) for team in team_keywords.keys()])
-
-# Aggregate the counts for comments
-comments_counts = comments.select([sql_sum(col(team).cast("int")).alias(team) for team in team_keywords.keys()])
-
-# Convert the Spark DataFrame to a Pandas DataFrame
-submissions_counts_pd = submissions_counts.toPandas()
-comments_counts_pd = comments_counts.toPandas()
-
-# Transform the DataFrame to a long format
-submissions_counts_long = submissions_counts_pd.melt(var_name='Teams', value_name='Mentions')
-comments_counts_long = comments_counts_pd.melt(var_name='Teams', value_name='Mentions')
-```
-
-
-
-**Goal:** *Identify the teams that have the most engagement on the main college basketball subreddit.*
-
-To commence our analysis of the 2022 basketball tournament, it's crucial to identify key teams for detailed study. Among the 68 participating teams, our focus will be on the **Elite 8**. These teams, namely Houston, Kansas, Villanova, Duke, Arkansas, Saint Peter's, North Carolina, and Miami, not only excelled in the tournament but also garnered significant audience interest, as per the 2022 DI Men's Basketball Championship Official Bracket (https://www.ncaa.com/brackets/basketball-men/d1/2022). Additionally, incorporating insights from `author_flair_text` analysis, we included Purdue and Illinois, two teams that enjoyed considerable support, to broaden our scope.
-
-
-```{python plot1, eval: true}
+```{python setup}
+#| eval: true
 import plotly.express as px
+import pandas as pd
+```
 
+```{python load_data}
+#| eval: true
+submissions_counts_long = pd.read_csv('../data/csv/submissions_counts_long.csv')
+comments_counts_long = pd.read_csv('../data/csv/comments_counts_long.csv')
+```
+
+```{python clean_data}
+| eval: true
 # Create the interactive Histogram for Submissions Counts
 fig1 = px.bar(submissions_counts_long, x='Teams', y='Mentions', title='Histogram of Team Mentions in Submissions')
 
@@ -373,6 +253,13 @@ fig1.update_layout(
 
 fig1.show()
 ```
+
+
+
+**Goal:** *Identify the teams that have the most engagement on the main college basketball subreddit.*
+
+To commence our analysis of the 2022 basketball tournament, it's crucial to identify key teams for detailed study. Among the 68 participating teams, our focus will be on the **Elite 8**. These teams, namely Houston, Kansas, Villanova, Duke, Arkansas, Saint Peter's, North Carolina, and Miami, not only excelled in the tournament but also garnered significant audience interest, as per the 2022 DI Men's Basketball Championship Official Bracket (https://www.ncaa.com/brackets/basketball-men/d1/2022). Additionally, incorporating insights from `author_flair_text` analysis, we included Purdue and Illinois, two teams that enjoyed considerable support, to broaden our scope.
+
 
 The total number of mentions in the submissions dataframe for some of the best teams during the 2021-2022 college basketball season
 
