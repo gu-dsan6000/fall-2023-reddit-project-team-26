@@ -4,12 +4,12 @@ Please find the code for this analysis in the notebooks located [here](https://g
 
 ## Executive Summary
 
-Our NLP analysis led us to a number of interesting conclusions regarding user sentiment in reddit data for our chosen college basketball subreddits. We used comment frequency and sentiment to analyze things like player and team popularity, how teams react to big wins and big losses, and sentiment around team successes. First we found that there were a number of very popular players, and the popularity of these players ebbed and flowed over the course of the season as their team successes varied. Then, as the season wound down, excitement about these players transferring increased. That increase is shown here:
+Our NLP analysis led us to a number of interesting conclusions regarding user sentiment in reddit data for our chosen college basketball subreddits. We used comment frequency and sentiment to analyze things like player and team popularity, how teams react to big wins and big losses, and sentiment around team successes. First we found that there were a number of very popular players, and the popularity of these players ebbed and flowed over the course of the season. We also found that popular discussion points such as the transfer portal were discussed heavily on reddit and the amount of disucssed ebbed over the course of the season.
 
 ::: {#fig-playercomments0 layout-ncol=1}
-![](../data/plots/comments_perplayer.png){fig-align="center"}
+![](../data/plots/comments_transfer.png){fig-align="center"}
 
-Number of comments in the College Basketball subreddit for each player in the 2021-2022 season. Players displayed are first/second team all americans. 
+Disucssion of the transfer portal during the 2021-2022 season in the comments dataframe. 
 :::
 
 Then, we examined external data about how these teams were performing and compared that to how fans were feeling about their teams. We took some top teams and saw that there was a wide distribution of feeling about them, but overall, “Cinderella” teams were viewed favorably in submissions, and each team was viewed about equally in the comments. Additionally, we examined how sentiment varied over the season for the two most successful teams, Kansas and UNC. Here we visualize the sentiment for some of the top teams in the 2022 NCAA tournament. 
@@ -58,7 +58,7 @@ Most common words in comments and submissions after standard nlp cleaning.
 
 The most common words in comments and submissions align with this being posts and comments about basketball. Words like team, game, final, and win are all sport related words. While there are differences between comments and submissions it's not very clear that there is any pattern in the differences between the top words. We also looked at TF-IDF scores to identify the most important words, the findings of this were not as relevant with words such as: “punish”, “harris”, and “load” being the most important words so we will not further discuss those scores. 
 
-### Identifying Discussion Topics (Business Goals 5 & 6)
+### Identifying Discussion Topics (Business Goals 4 & 5)
 
 Two topics that are related to college basketball are the discussion about top players and the discussion of transfers and the transfer portal. We will look at both of these topics in our reddit data, using only the comments data as our submissions data is so limited. This section will answer business goals 5 and 6. 
 
@@ -82,6 +82,12 @@ The most discussed player in the college basketball subreddit in each month of t
 :::
 
 Since the NCAA became more flexible with transfers in 2020, there has been a creation of the transfer market in College Basketball. This has led to lots of discussion among whether this is good for the players, the sport, and fans. Additionally, fans talk a lot about who might be transferring and who their team could pick up in the transfer portal. Here we see how much the transfer process is discussed over the course of the season. Transfer discussion rises from January to May, with a spike from March to May. This makes sense because most players decide to transfer after the season is over, which for most teams is in March. This means fans are very reactionary in their discussion about transfers, only talking about it when players are starting to transfer, but not so much during the regular season. 
+
+::: {#fig-playercomments0 layout-ncol=1}
+![](../data/plots/comments_transfer.png){fig-align="center"}
+
+Disucssion of the transfer portal during the 2021-2022 season in the comments dataframe. 
+:::
 
 ### Big Wins and Big Losses (Business Goal 7)
 
@@ -114,9 +120,8 @@ We will investigate whether the sentiment expressed in fan comments is influence
 
 In this section, we built a sentiment model and tried to find the relationship between the team ranking and the sentiment. We employ a sentiment analysis model originally trained on Twitter data for our study. The decision to apply this model to Reddit data is grounded in the shared characteristics of both platforms, including similarities in content types, language styles, topic diversity, user engagement, and the nature of online discussions. However, it's important to acknowledge a key difference: Twitter's character limit often results in more succinct and occasionally cryptic language, whereas Reddit allows for lengthier and more detailed comments. This disparity in content style could potentially impact the model's accuracy in analyzing sentiment on Reddit, a factor we'll carefully consider in our analysis.
 
-*The analysis for business goal 8 is in progress and was not ready for this version*
 
-### Sentiment Analysis (Business Goal 9)
+### Sentiment Analysis (Business Goal 8)
 
 In our previous exploration within the EDA section, we focused on quantifying the mention frequency of ten basketball teams. In our current analysis, we delve deeper by leveraging sentiment analysis models to dissect the emotional tone embedded within submissions and comments that reference each team. This sentiment distribution offers a nuanced perspective, going beyond mere mention counts to encapsulate the nature of the discourse surrounding these teams.
 
