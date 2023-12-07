@@ -240,7 +240,7 @@ comments_counts_long = pd.read_csv('../data/csv/comments_counts_long.csv')
 ```
 
 ```{python clean_data}
-| eval: true
+#| eval: true
 # Create the interactive Histogram for Submissions Counts
 fig1 = px.bar(submissions_counts_long, x='Teams', y='Mentions', title='Histogram of Team Mentions in Submissions')
 
