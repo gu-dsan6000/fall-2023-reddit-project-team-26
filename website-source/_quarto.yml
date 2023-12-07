@@ -18,8 +18,8 @@ website:
       - eda.qmd
       - nlp.qmd
       - ml.qmd
-      - feedback.qmd
-      - summary.qmd
+      - discussion.qmd
+      - conclusion.qmd
 
   page-footer:
     left: |
