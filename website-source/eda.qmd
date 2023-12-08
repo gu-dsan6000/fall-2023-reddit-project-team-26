@@ -232,18 +232,25 @@ We found that many of the questions that arose during our question 3 analysis al
 To commence our analysis of the 2022 basketball tournament, it's crucial to identify key teams for detailed study. Among the 68 participating teams, our focus will be on the **Elite 8**. These teams, namely Houston, Kansas, Villanova, Duke, Arkansas, Saint Peter's, North Carolina, and Miami, not only excelled in the tournament but also garnered significant audience interest, as per the 2022 DI Men's Basketball Championship Official Bracket (https://www.ncaa.com/brackets/basketball-men/d1/2022). Additionally, incorporating insights from `author_flair_text` analysis, we included Purdue and Illinois, two teams that enjoyed considerable support, to broaden our scope.
 
 ```{python setup}
+#| echo: false
 #| eval: true
 import plotly.express as px
 import pandas as pd
 ```
 
 ```{python load_data}
+#| echo: false
 #| eval: true
 submissions_counts_long = pd.read_csv('../data/csv/submissions_counts_long.csv')
 comments_counts_long = pd.read_csv('../data/csv/comments_counts_long.csv')
+daily_mentions_submissions_long = pd.read_csv('../data/csv/daily_mentions_submissions_long.csv')
+daily_mentions_comments_long = pd.read_csv('../data/csv/daily_mentions_comments_long.csv')
 ```
 
+::: {#fig-14 layout-ncol=1}
+
 ```{python plot1}
+#| echo: false
 #| eval: true
 # Create the interactive Histogram for Submissions Counts
 fig1 = px.bar(submissions_counts_long, x='Teams', y='Mentions', title='Histogram of Team Mentions in Submissions')
@@ -258,22 +265,15 @@ fig1.update_layout(
 fig1.show()
 ```
 
-
-
-
-
-
 The total number of mentions in the submissions dataframe for some of the best teams during the 2021-2022 college basketball season
+:::
 
 The graph presents a striking observation: Miami is mentioned markedly more often than other teams, a notably unexpected finding. Additionally, it reveals that the comment mention counts for Kansas, the 2022 champion, North Carolina, the runner-up, and the consistently strong Purdue, significantly exceed those of other teams. This aligns with typical expectations and highlights their prominence in discussions.
 
 ::: {#fig-15 layout-ncol=1}
-![](../data/plots/eda_images/team_mention_com.png){fig-align="center" width="600"}
-
-The total number of mentions in the comments dataframe for some of the best teams during the 2021-2022 college basketball season
-:::
 
 ```{python plot2}
+#| echo: false
 #| eval: true
 # Create the interactive Histogram for Comments Counts
 fig2 = px.bar(comments_counts_long, x='Teams', y='Mentions', title='Histogram of Team Mentions in Comments')
@@ -288,6 +288,9 @@ fig2.update_layout(
 fig2.show()
 ```
 
+The total number of mentions in the comments dataframe for some of the best teams during the 2021-2022 college basketball season
+:::
+
 The data from the comment counts largely mirrors the trends observed in the previous figure, with a notable exception: Purdue’s mentions significantly surpass those of Kansas and North Carolina, aligning them more closely with Miami’s high mention frequency. This suggests a distinct level of engagement and interest in Purdue, setting it apart from the other teams.
 
 The empirical analysis reveals a correlation between a team’s number of mentions and factors like popularity and season performance. Frequently mentioned teams include top performers like Kansas, the eventual champions, and unexpected contenders like North Carolina, which aligns with our initial expectations. Intriguingly, a team like Miami, despite a lower seed ranking and only reaching the top eight, has garnered more submissions and comment mentions than even the championship team. This anomaly suggests there are additional underlying factors influencing Miami’s high visibility, warranting further investigation to uncover these reasons.
@@ -295,18 +298,66 @@ The empirical analysis reveals a correlation between a team’s number of mentio
 As we progress, our objective is to conduct a detailed analysis of the daily mention trends for each team. This will offer a more nuanced understanding of how audience engagement evolved over the course of the tournament. To optimize our analysis, and informed by our previous findings, we’ve narrowed our focus to Miami, Kansas, North Carolina, and Purdue. These four teams, having attracted a significantly higher volume of mentions, are ideal candidates for our in-depth examination of engagement patterns.
 
 ::: {#fig-16 layout-ncol=1}
-![](../data/plots/eda_images/top_team_mention_sub.png){fig-align="center" width="600"}
 
-The daily number of mentions in the submissions dataframe for 4 of the best teams during the 2021-2022 college basketball season
+```{python plot3}
+#| echo: false
+#| eval: true
+# Create the interactive line plot
+fig3 = px.line(daily_mentions_submissions_long, 
+              x='date', 
+              y='Mentions', 
+              color='Team', 
+              title='Daily Team Mentions in Submissions')
+
+fig3.update_layout(
+    xaxis_title='Date',
+    yaxis_title='Daily Mentions',
+    title_x=0.5,
+    legend_title_text='Team'
+)
+
+fig3.show()
+```
+
+The daily number of mentions in the submissions dataframe for the best teams during the 2021-2022 college basketball season
 :::
 
-The chart illustrates a distinct trend: From the season’s onset in November 2021 to March 2022, Miami led in commit frequency, surpassing other teams. However, a shift occurred in mid-March 2022, as Miami’s commit frequency began to decline, eventually aligning with the baseline levels seen in other teams. Concurrently, there was a notable surge in submissions related to Kansas and North Carolina, culminating in a peak in early April 2022. This increase is clearly linked to their progression to the finals, reflecting heightened audience interest and engagement as these teams advanced in the tournament.
+The temporal distribution of team mentions in the dataset displays marked variability, suggesting a correlation with fluctuating levels of public interest, possibly driven by match schedules, pivotal games, or noteworthy events. Certain teams experience pronounced spikes in mentions, which could be indicative of key matches or pivotal moments in the season that galvanized public attention.
+
+The frequency of mentions potentially mirrors team popularity or their competitive performance, with consistently mentioned teams likely enjoying robust support or delivering compelling performances. For instance, from the commencement of the season in November 2021 through to March 2022, mentions of Miami dominated the discourse, outstripping other teams in visibility. This trend, however, experienced a reversal in mid-March 2022, with Miami’s mention frequency tapering to levels comparable with its peers, an anomaly that warrants further inquiry to elucidate the underlying factors.
+
+In parallel, the discourse surrounding Kansas and North Carolina witnessed a pronounced uptick, reaching an apex in early April 2022. This surge can be directly attributed to their advancement to the finals, mirroring the crescendo of public engagement and interest as these teams progressed through critical stages of the tournament.
+
+The mention trajectory for the remaining teams adheres to a somewhat predictable pattern: a sharp escalation post the season’s inception in November, followed by a series of oscillations in sync with the unfolding of the games, and typically culminating in a zenith coinciding with their final matches before a swift decline.
 
 ::: {#fig-17 layout-ncol=1}
-![](../data/plots/eda_images/top_team_mention_com.png){fig-align="center" width="600"}
 
-The daily number of mentions in the comments dataframe for 4 of the best teams during the 2021-2022 college basketball season
+```{python plot4}
+#| echo: false
+#| eval: true
+fig4 = px.line(daily_mentions_comments_long, 
+              x='date', 
+              y='Mentions', 
+              color='Team', 
+              title='Daily Team Mentions in Comments')
+
+fig4.update_layout(
+    xaxis_title='Date',
+    yaxis_title='Daily Mentions',
+    title_x=0.5,
+    legend_title_text='Team'
+)
+
+fig4.show()
+```
+
+The daily number of mentions in the comments dataframe for the best teams during the 2021-2022 college basketball season
 :::
-The data shows that while Miami and Purdue have a higher volume of daily comments, the disparity isn’t as marked when compared to other teams. Both teams experienced a peak in comment activity from mid-to-late March. This trend aligns with key tournament events: Purdue’s journey ended in the top 16 after their loss to St. Peter’s on March 25, while Miami concluded in the top 8 following their defeat by Kansas on March 27. North Carolina’s peak in comment volume around mid-March can be directly attributed to their victory over the previous year’s champions, Baylor. Kansas, on the other hand, saw its comment numbers reach the highest point among all teams in early April 2022, a testament to their ultimate championship victory, drawing substantial audience engagement and discussion.
+
+Echoing the trends observed in the Submissions, the Comments plot reveals even more stark fluctuations in daily mentions. These pronounced spikes in activity are indicative of significant rallying points in public discourse, potentially tethered to pivotal games or momentous events that captivated the audience's attention.
+
+In a comparative lens, the Comments plot registers a more voluminous mention count than its Submissions counterpart, suggesting a propensity for the community to engage more actively through commentary rather than through initiating new Submissions. This could reflect a community behavioral pattern where commenting serves as a more immediate and communal form of interaction in the discourse surrounding team performances.
+
+The data shows that while Miami and Purdue have a higher volume of daily comments, the disparity isn’t as marked when compared to other teams. Both teams experienced a peak in comment activity from mid-to-late March. This trend aligns with key tournament events: Purdue’s journey ended in the top 16 after their loss to St. Peter’s on March 25, while Miami concluded in the top 8 following their defeat by Kansas on March 27. North Carolina’s peak in comment volume around mid-March can be directly attributed to their victory over the previous year’s champions, Baylor. Kansas distinguished itself with a comment volume zenith in early April 2022, eclipsing all other teams. This surge is emblematic of their ascension to the championship, sparking a wave of audience interaction and discussion reflective of their ultimate victory.
 
 Overall, the variations in comment volume mirror the dynamics of audience engagement. As the season approaches its climax, particularly the finals, discussions intensify. The disparity in comment counts across different teams highlights the variations in their popularity and performance throughout the season. The data vividly illustrates that audience engagement peaked during critical matches, with this fervor culminating in the finals on April 4, indicating a high level of interest and involvement from fans during these pivotal moments of the tournament.

@@ -35,8 +35,7 @@ website:
 format:
   html:
     theme: cosmo
-    css: styles.css
+    css: style.css
     toc: true
     code-fold: true
     embed-resources: true
-
