@@ -227,6 +227,10 @@ We found that many of the questions that arose during our question 3 analysis al
 
 [Code for this analysis](code_files/eda_q4.html)
 
+**Goal:** *Identify the teams that have the most engagement on the main college basketball subreddit.*
+
+To commence our analysis of the 2022 basketball tournament, it's crucial to identify key teams for detailed study. Among the 68 participating teams, our focus will be on the **Elite 8**. These teams, namely Houston, Kansas, Villanova, Duke, Arkansas, Saint Peter's, North Carolina, and Miami, not only excelled in the tournament but also garnered significant audience interest, as per the 2022 DI Men's Basketball Championship Official Bracket (https://www.ncaa.com/brackets/basketball-men/d1/2022). Additionally, incorporating insights from `author_flair_text` analysis, we included Purdue and Illinois, two teams that enjoyed considerable support, to broaden our scope.
+
 ```{python setup}
 #| eval: true
 import plotly.express as px
@@ -239,7 +243,7 @@ submissions_counts_long = pd.read_csv('../data/csv/submissions_counts_long.csv')
 comments_counts_long = pd.read_csv('../data/csv/comments_counts_long.csv')
 ```
 
-```{python clean_data}
+```{python plot1}
 #| eval: true
 # Create the interactive Histogram for Submissions Counts
 fig1 = px.bar(submissions_counts_long, x='Teams', y='Mentions', title='Histogram of Team Mentions in Submissions')
@@ -256,9 +260,7 @@ fig1.show()
 
 
 
-**Goal:** *Identify the teams that have the most engagement on the main college basketball subreddit.*
 
-To commence our analysis of the 2022 basketball tournament, it's crucial to identify key teams for detailed study. Among the 68 participating teams, our focus will be on the **Elite 8**. These teams, namely Houston, Kansas, Villanova, Duke, Arkansas, Saint Peter's, North Carolina, and Miami, not only excelled in the tournament but also garnered significant audience interest, as per the 2022 DI Men's Basketball Championship Official Bracket (https://www.ncaa.com/brackets/basketball-men/d1/2022). Additionally, incorporating insights from `author_flair_text` analysis, we included Purdue and Illinois, two teams that enjoyed considerable support, to broaden our scope.
 
 
 The total number of mentions in the submissions dataframe for some of the best teams during the 2021-2022 college basketball season
@@ -270,6 +272,22 @@ The graph presents a striking observation: Miami is mentioned markedly more ofte
 
 The total number of mentions in the comments dataframe for some of the best teams during the 2021-2022 college basketball season
 :::
+
+```{python plot2}
+#| eval: true
+# Create the interactive Histogram for Comments Counts
+fig2 = px.bar(comments_counts_long, x='Teams', y='Mentions', title='Histogram of Team Mentions in Comments')
+
+fig2.update_layout(
+    xaxis_title='Teams',
+    yaxis_title='Mentions',
+    xaxis={'categoryorder':'total descending'},
+    title_x=0.5
+)
+
+fig2.show()
+```
+
 The data from the comment counts largely mirrors the trends observed in the previous figure, with a notable exception: Purdue’s mentions significantly surpass those of Kansas and North Carolina, aligning them more closely with Miami’s high mention frequency. This suggests a distinct level of engagement and interest in Purdue, setting it apart from the other teams.
 
 The empirical analysis reveals a correlation between a team’s number of mentions and factors like popularity and season performance. Frequently mentioned teams include top performers like Kansas, the eventual champions, and unexpected contenders like North Carolina, which aligns with our initial expectations. Intriguingly, a team like Miami, despite a lower seed ranking and only reaching the top eight, has garnered more submissions and comment mentions than even the championship team. This anomaly suggests there are additional underlying factors influencing Miami’s high visibility, warranting further investigation to uncover these reasons.
