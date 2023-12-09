@@ -25,7 +25,7 @@ Collegiate Basketball: Collegiate basketball in the United States is regulated p
 
 ![](../data/plots/intro2.jpeg){fig-align="center" width="500"}
 
-Source: NCAA. Championship History. https://www.ncaa.com/history/basketball-men/d1 
+Source: Norlander, Matt. Kansas national title 2022: Printable March Madness bracket, NCAA Tournament champions, scores, results. https://www.cbssports.com/college-basketball/news/kansas-national-title-2022-printable-march-madness-bracket-ncaa-tournament-champions-scores-results/
 :::
 
 Part of our analysis will be analyzing the r/CBB (college basketball) subreddit, but we will also be analyzing the r/jayhawks and r/tarheels, the two teams to make the finals for college basketball in 2022 (Kansas won!). This way, we can also track the sentiments of the fans of the two most successful college basketball teams across the course of the season on their championship runs.
